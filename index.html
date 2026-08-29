@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XenoFuel Syndicate // USS Leviathan</title>
+    <title>XenoFuel Analytics // USS Leviathan</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -29,7 +30,7 @@
                         }
                     },
                     boxShadow: {
-                        'neon-acid': '0 0 10px rgba(57, 255, 20, 0.5), inset 0 0 10px rgba(57, 255, 20, 0.2)',
+                        'neon-acid': '0 0 10px rgba(57, 255, 20, 0.5), inset 0 0 10px rgba(57, 255, 20, 0.1)',
                         'neon-cyan': '0 0 15px rgba(0, 243, 255, 0.4)',
                         'neon-purple': '0 0 15px rgba(176, 38, 255, 0.4)',
                     }
@@ -41,217 +42,329 @@
         body {
             background-color: #030705;
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(57, 255, 20, 0.05), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(176, 38, 255, 0.05), transparent 25%);
+                radial-gradient(circle at 10% 20%, rgba(57, 255, 20, 0.03), transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(176, 38, 255, 0.03), transparent 30%);
+            color: #39ff14;
         }
         .scanline {
             width: 100%;
             height: 100px;
             z-index: 9999;
-            position: absolute;
+            position: fixed;
             pointer-events: none;
-            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(57,255,20,0.1) 50%, rgba(0,0,0,0) 100%);
-            opacity: 0.1;
-            animation: scanline 8s linear infinite;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(57,255,20,0.05) 50%, rgba(0,0,0,0) 100%);
+            animation: scanline 10s linear infinite;
         }
         @keyframes scanline {
             0% { top: -100px; }
-            100% { top: 100%; }
+            100% { top: 100vh; }
         }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #030705; }
-        ::-webkit-scrollbar-thumb { background: #39ff14; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #00f3ff; border-radius: 3px; }
     </style>
 </head>
-<body class="text-alien-acid font-mono antialiased min-h-screen selection:bg-alien-acid selection:text-void-900 relative overflow-x-hidden">
+<body class="font-mono antialiased min-h-screen selection:bg-alien-cyan selection:text-void-900 relative overflow-x-hidden">
     <div class="scanline"></div>
 
     <!-- HUD Header -->
-    <header class="max-w-7xl mx-auto px-6 py-6 border-b border-alien-acid/30 flex flex-col md:flex-row justify-between items-center bg-void-800/80 backdrop-blur-md sticky top-0 z-50 shadow-neon-acid">
+    <header class="max-w-7xl mx-auto px-6 py-6 border-b border-alien-acid/20 flex flex-col md:flex-row justify-between items-center bg-void-900/90 backdrop-blur-md sticky top-0 z-50">
         <div class="flex items-center space-x-4 mb-4 md:mb-0">
-            <div class="relative flex h-5 w-5">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-alien-acid opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-5 w-5 bg-alien-acid"></span>
+            <div class="relative flex h-4 w-4">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-alien-cyan opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-4 w-4 bg-alien-cyan"></span>
             </div>
             <div>
-                <h1 class="font-display font-black text-2xl tracking-widest text-white drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">XENOFUEL <span class="text-alien-acid">SYNDICATE</span></h1>
-                <p class="text-xs text-alien-cyan">Nave Nodriza: USS LEVIATHAN // Sector 7G</p>
+                <h1 class="font-display font-black text-2xl tracking-widest text-white drop-shadow-[0_0_8px_rgba(0,243,255,0.6)]">XENOFUEL <span class="text-alien-cyan">ANALYTICS</span></h1>
+                <p class="text-[0.65rem] text-alien-acid tracking-widest uppercase">Nave Nodriza USS LEVIATHAN // Data Division</p>
             </div>
         </div>
-        <div class="text-right border border-alien-acid/40 px-4 py-2 bg-void-700/50 shadow-[inset_0_0_10px_rgba(57,255,20,0.1)]">
-            <p class="text-xs text-gray-400">SUPREME COMMANDER & ARCHITECT</p>
-            <p class="font-display text-sm text-alien-purple font-bold tracking-widest uppercase">Pablo Figueroa</p>
+        <div class="text-right border-l-2 border-alien-purple pl-4">
+            <p class="text-[0.65rem] text-gray-500 uppercase tracking-widest">Chief Data Architect</p>
+            <p class="font-display text-sm text-alien-purple font-bold tracking-widest uppercase shadow-neon-purple">Pablo Figueroa</p>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-10 space-y-12">
+    <main class="max-w-7xl mx-auto px-6 py-10 space-y-10">
         
-        <!-- Project Briefing -->
-        <section class="border border-alien-cyan/50 bg-void-800/60 p-8 shadow-neon-cyan relative overflow-hidden group">
-            <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
-                <svg width="120" height="120" viewBox="0 0 100 100" fill="none" stroke="#00f3ff" stroke-width="1">
-                    <circle cx="50" cy="50" r="45" stroke-dasharray="4 4" class="animate-[spin_10s_linear_infinite]" />
-                    <circle cx="50" cy="50" r="30" stroke-dasharray="2 6" class="animate-[spin_15s_linear_infinite_reverse]" />
-                    <polygon points="50,25 72,65 28,65" stroke-dasharray="2 2"/>
-                </svg>
-            </div>
+        <!-- Project Briefing & Interactive Charts -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <div class="relative z-10 space-y-4 max-w-3xl">
-                <div class="inline-block px-3 py-1 border border-alien-purple text-alien-purple text-xs font-bold bg-alien-purple/10 uppercase tracking-widest">
-                    Clasificación: Nivel Omega
+            <!-- Context -->
+            <div class="lg:col-span-5 border border-alien-cyan/30 bg-void-800/40 p-6 shadow-neon-cyan relative overflow-hidden flex flex-col justify-center">
+                <div class="absolute -right-10 -top-10 opacity-10">
+                    <svg width="200" height="200" viewBox="0 0 100 100" fill="none" stroke="#00f3ff" stroke-width="0.5">
+                        <circle cx="50" cy="50" r="45" stroke-dasharray="4 4" class="animate-[spin_20s_linear_infinite]" />
+                        <polygon points="50,10 90,90 10,90" stroke-dasharray="2 2" class="animate-[spin_30s_linear_infinite_reverse]"/>
+                    </svg>
                 </div>
-                <h2 class="text-3xl md:text-5xl font-display font-bold text-white uppercase drop-shadow-[0_0_5px_rgba(0,243,255,0.8)]">
-                    Proyecto <span class="text-alien-cyan">Singularidad</span>
-                </h2>
-                <p class="text-gray-300 text-sm md:text-base leading-relaxed">
-                    Extracción hiper-intensiva de isótopos de Materia Oscura y Plasma Estelar en los restos de la nebulosa de Orión. 
-                    Nuestro objetivo comercial es abastecer de combustible cuántico a las flotas de la <span class="text-alien-purple">Federación Galáctica</span> y mantener el monopolio energético con el <span class="text-alien-toxic">Imperio Draconiano</span>. El Leviathan opera al 110% de capacidad de refinería.
-                </p>
-                <div class="flex space-x-6 text-xs text-alien-cyan border-t border-alien-cyan/30 pt-4 mt-4">
-                    <span>> ESTADO: OPERATIVO</span>
-                    <span>> AMENAZA HOSTIL: BAJA</span>
-                    <span>> FASE: RECOLECCIÓN</span>
+                
+                <div class="relative z-10 space-y-4">
+                    <div class="inline-block px-2 py-1 border border-alien-cyan text-alien-cyan text-[0.6rem] font-bold bg-alien-cyan/10 uppercase tracking-widest">
+                        Operación: Singularidad de Mercado
+                    </div>
+                    <h2 class="text-3xl font-display font-bold text-white uppercase">
+                        Análisis de <span class="text-transparent bg-clip-text bg-gradient-to-r from-alien-cyan to-alien-purple">Flujo Cuántico</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Evaluación interactiva del modelo de negocio de extracción estelar. Visualización del rendimiento de recolección de isótopos exóticos y distribución comercial a imperios del sector (Federación, Draconianos, y Mercado Negro). Los gráficos responden en tiempo real a la telemetría del Leviathan.
+                    </p>
+                    <div class="flex space-x-4 text-[0.65rem] text-alien-acid pt-2 uppercase">
+                        <span class="bg-alien-acid/10 px-2 py-1 rounded border border-alien-acid/30">> Telemetría: Sincronizada</span>
+                        <span class="bg-alien-acid/10 px-2 py-1 rounded border border-alien-acid/30">> Nodos: Estables</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Container -->
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Line Chart -->
+                <div class="border border-alien-acid/20 bg-void-800/40 p-4 relative">
+                    <p class="text-[0.6rem] text-gray-400 uppercase tracking-widest mb-2 border-b border-alien-acid/20 pb-1">Tasa de Extracción (T-Tons / Ciclo)</p>
+                    <div class="h-48 w-full">
+                        <canvas id="extractionChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Doughnut Chart -->
+                <div class="border border-alien-purple/20 bg-void-800/40 p-4 relative">
+                    <p class="text-[0.6rem] text-gray-400 uppercase tracking-widest mb-2 border-b border-alien-purple/20 pb-1">Distribución de Exportaciones (%)</p>
+                    <div class="h-48 w-full flex items-center justify-center">
+                        <canvas id="distributionChart"></canvas>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Metrics Dashboard -->
+        <!-- 15 Metrics HUD Grid -->
         <section>
-            <div class="flex items-center justify-between mb-6 border-b border-alien-acid/30 pb-2">
-                <h3 class="font-display text-xl text-alien-acid tracking-widest uppercase">
-                    Telemetría y Rendimiento Comercial (15 Métricas)
+            <div class="flex items-center justify-between mb-4 border-b border-alien-acid/20 pb-2">
+                <h3 class="font-display text-lg text-white tracking-widest uppercase">
+                    Métricas de Negocio <span class="text-alien-cyan">Operativas</span>
                 </h3>
-                <span class="text-xs bg-alien-acid text-void-900 px-2 py-1 font-bold animate-pulse">LIVE LINK ACTIVE</span>
             </div>
 
-            <!-- Grid 5 columns on large screens, 3 on medium, 1 on small -->
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                <!-- 15 Metric Cards -->
+                
                 <!-- Metric 1 -->
-                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors shadow-[inset_0_0_8px_rgba(57,255,20,0.1)]">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Materia Extraída</p>
-                    <p class="font-display text-2xl text-white">4.82 <span class="text-sm text-alien-acid">T-Tons</span></p>
+                <div class="border border-alien-acid/30 bg-void-800/50 p-3 hover:border-alien-acid transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Volumen Total Extraído</p>
+                    <p class="font-display text-xl text-white group-hover:text-alien-acid transition-colors">14.8 <span class="text-xs">kT</span></p>
                 </div>
 
                 <!-- Metric 2 -->
-                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors shadow-[inset_0_0_8px_rgba(57,255,20,0.1)]">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Pureza de Plasma</p>
-                    <div class="flex items-end justify-between">
-                        <p class="font-display text-2xl text-alien-cyan">99.4%</p>
-                        <div class="w-12 h-1 bg-void-900 mb-2"><div class="h-full bg-alien-cyan w-[99.4%]"></div></div>
-                    </div>
+                <div class="border border-alien-cyan/30 bg-void-800/50 p-3 hover:border-alien-cyan transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Margen de Beneficio Net.</p>
+                    <p class="font-display text-xl text-alien-cyan">64.2%</p>
                 </div>
 
                 <!-- Metric 3 -->
-                <div class="border border-alien-purple/50 bg-void-800 p-4 hover:bg-void-700 transition-colors shadow-[inset_0_0_8px_rgba(176,38,255,0.15)] relative overflow-hidden">
-                    <div class="absolute right-0 top-0 h-full w-1 bg-alien-purple"></div>
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Ingresos (Créditos)</p>
-                    <p class="font-display text-xl text-alien-purple font-bold">⌬ 842.5 Billones</p>
+                <div class="border border-alien-purple/30 bg-void-800/50 p-3 hover:border-alien-purple transition-colors group relative overflow-hidden">
+                    <div class="absolute right-0 top-0 h-full w-0.5 bg-alien-purple"></div>
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Ingresos Brutos</p>
+                    <p class="font-display text-lg text-alien-purple">⌬ 1.2 Trillones</p>
                 </div>
 
                 <!-- Metric 4 -->
-                <div class="border border-alien-danger/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Integridad de Casco</p>
-                    <p class="font-display text-2xl text-alien-toxic">88.2%</p>
-                    <p class="text-[0.6rem] text-alien-danger mt-1">> Requiere Mantenimiento</p>
+                <div class="border border-alien-acid/30 bg-void-800/50 p-3 hover:border-alien-acid transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Pureza de Antimateria</p>
+                    <div class="flex items-end justify-between mt-1">
+                        <p class="font-display text-lg text-white">99.98%</p>
+                        <div class="w-10 h-1 bg-void-900 mb-1.5"><div class="h-full bg-alien-acid w-[100%]"></div></div>
+                    </div>
                 </div>
 
                 <!-- Metric 5 -->
-                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors shadow-[inset_0_0_8px_rgba(57,255,20,0.1)]">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Satisfacción Draconiana</p>
-                    <div class="flex space-x-1 mt-2">
-                        <div class="h-4 w-full bg-alien-acid"></div>
-                        <div class="h-4 w-full bg-alien-acid"></div>
-                        <div class="h-4 w-full bg-alien-acid"></div>
-                        <div class="h-4 w-full bg-alien-acid"></div>
-                        <div class="h-4 w-full border border-alien-acid bg-transparent"></div>
-                    </div>
-                    <p class="text-[0.6rem] text-right mt-1">Nivel 4/5</p>
+                <div class="border border-alien-danger/30 bg-void-800/50 p-3 hover:border-alien-danger transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Costos de Seguridad (Mercenarios)</p>
+                    <p class="font-display text-lg text-alien-danger">⌬ 450 B</p>
                 </div>
 
                 <!-- Metric 6 -->
-                <div class="border border-alien-cyan/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Drones Recolectores</p>
-                    <p class="font-display text-2xl text-white">14,052</p>
-                    <p class="text-[0.6rem] text-alien-cyan mt-1">Activos en enjambre</p>
+                <div class="border border-alien-cyan/30 bg-void-800/50 p-3 hover:border-alien-cyan transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Drones Mineros Activos</p>
+                    <p class="font-display text-xl text-white">84,092</p>
+                    <p class="text-[0.5rem] text-alien-cyan mt-1">Enjambre Beta en línea</p>
                 </div>
 
                 <!-- Metric 7 -->
-                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Impuestos Federales</p>
-                    <p class="font-display text-xl text-alien-danger">- ⌬ 12.4 B</p>
-                    <p class="text-[0.6rem] text-gray-500 mt-1">Tarifa fronteriza pagada</p>
+                <div class="border border-alien-acid/30 bg-void-800/50 p-3 hover:border-alien-acid transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">NPS (Federación)</p>
+                    <p class="font-display text-xl text-alien-acid">9.4/10</p>
+                    <p class="text-[0.5rem] text-gray-500 mt-1">Nivel de lealtad comercial</p>
                 </div>
 
                 <!-- Metric 8 -->
-                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors flex flex-col justify-between">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Cuerpos Minados</p>
-                    <p class="font-display text-3xl text-alien-acid">127</p>
+                <div class="border border-alien-purple/30 bg-void-800/50 p-3 hover:border-alien-purple transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Cuerpos Celestes Agotados</p>
+                    <p class="font-display text-xl text-white group-hover:text-alien-purple transition-colors">47</p>
                 </div>
 
                 <!-- Metric 9 -->
-                <div class="border border-alien-toxic/40 bg-void-800 p-4 hover:bg-void-700 transition-colors shadow-[inset_0_0_8px_rgba(163,255,0,0.1)]">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Reserva Hyper-Jump</p>
-                    <p class="font-display text-2xl text-alien-toxic">100%</p>
-                    <div class="h-1 w-full bg-alien-toxic shadow-[0_0_5px_#a3ff00] mt-2"></div>
+                <div class="border border-alien-toxic/30 bg-void-800/50 p-3 hover:border-alien-toxic transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Cuota de Mercado Draconiana</p>
+                    <p class="font-display text-xl text-alien-toxic">82%</p>
+                    <div class="h-0.5 w-full bg-alien-toxic/20 mt-1.5"><div class="h-full bg-alien-toxic w-[82%] shadow-[0_0_5px_#a3ff00]"></div></div>
                 </div>
 
                 <!-- Metric 10 -->
-                <div class="border border-alien-purple/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Radiación Interna</p>
-                    <p class="font-display text-xl text-white">0.04 <span class="text-alien-purple text-sm">Sieverts/h</span></p>
-                    <p class="text-[0.6rem] text-alien-acid mt-1">Límites seguros</p>
+                <div class="border border-alien-acid/30 bg-void-800/50 p-3 hover:border-alien-acid transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Retorno de Inversión (ROI)</p>
+                    <p class="font-display text-lg text-alien-acid">+315%</p>
+                    <p class="text-[0.5rem] text-gray-500 mt-1">Ciclo fiscal actual</p>
                 </div>
 
                 <!-- Metric 11 -->
-                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Intercepciones Pirata</p>
-                    <p class="font-display text-2xl text-white">04</p>
-                    <p class="text-[0.6rem] text-alien-danger mt-1">Todas neutralizadas</p>
+                <div class="border border-alien-danger/30 bg-void-800/50 p-3 hover:border-alien-danger transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Pérdida por Saqueos (Piratas)</p>
+                    <p class="font-display text-lg text-white group-hover:text-alien-danger transition-colors">1.2%</p>
                 </div>
 
                 <!-- Metric 12 -->
-                <div class="border border-alien-cyan/40 bg-void-800 p-4 hover:bg-void-700 transition-colors relative">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Temp. Núcleo Refinería</p>
-                    <p class="font-display text-2xl text-alien-cyan">8.4M <span class="text-sm">K</span></p>
-                    <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-alien-cyan to-alien-danger"></div>
+                <div class="border border-alien-cyan/30 bg-void-800/50 p-3 hover:border-alien-cyan transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Costos de Logística Estelar</p>
+                    <p class="font-display text-lg text-alien-cyan">⌬ 89.4 B</p>
                 </div>
 
                 <!-- Metric 13 -->
-                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Tasa de Decaimiento</p>
-                    <p class="font-display text-xl text-alien-toxic">0.00012% / ciclo</p>
+                <div class="border border-alien-acid/30 bg-void-800/50 p-3 hover:border-alien-acid transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Eficiencia de Refinería</p>
+                    <div class="flex items-center space-x-2 mt-1">
+                        <div class="w-2 h-2 rounded-full bg-alien-acid shadow-[0_0_5px_#39ff14] animate-pulse"></div>
+                        <span class="text-base text-white font-display">OPTIMIZADO</span>
+                    </div>
                 </div>
 
                 <!-- Metric 14 -->
-                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
-                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Vitalidad Tripulación</p>
-                    <div class="flex items-center space-x-2 mt-1">
-                        <div class="w-3 h-3 rounded-full bg-alien-acid shadow-[0_0_5px_#39ff14]"></div>
-                        <span class="text-lg text-white font-display">ÓPTIMA</span>
-                    </div>
+                <div class="border border-alien-purple/30 bg-void-800/50 p-3 hover:border-alien-purple transition-colors group">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">CAC (Costo Adq. Imperio)</p>
+                    <p class="font-display text-lg text-alien-purple">⌬ 2.1 B</p>
+                    <p class="text-[0.5rem] text-gray-500 mt-1">Sobornos y diplomacia</p>
                 </div>
 
                 <!-- Metric 15 -->
-                <div class="border border-alien-purple/40 bg-void-800 p-4 hover:bg-void-700 transition-colors relative flex items-center justify-center group overflow-hidden">
-                    <div class="absolute w-[200%] h-[200%] bg-alien-purple/10 animate-[spin_4s_linear_infinite] group-hover:bg-alien-purple/20"></div>
-                    <div class="relative z-10 text-center">
-                        <p class="text-[0.65rem] text-gray-300 uppercase tracking-wider mb-1">Eficiencia Extracción</p>
-                        <p class="font-display text-2xl font-bold text-white drop-shadow-[0_0_5px_rgba(176,38,255,0.8)]">99.9%</p>
-                    </div>
+                <div class="border border-alien-cyan/30 bg-void-800/50 p-3 hover:border-alien-cyan transition-colors group relative flex flex-col justify-center items-center text-center">
+                    <p class="text-[0.55rem] text-gray-400 uppercase tracking-wider mb-1">Estatus del Sindicato</p>
+                    <p class="font-display text-lg font-bold text-white drop-shadow-[0_0_3px_rgba(0,243,255,0.8)]">MONOPOLIO</p>
                 </div>
-
             </div>
         </section>
 
     </main>
 
     <!-- Footer HUD -->
-    <footer class="max-w-7xl mx-auto px-6 py-6 border-t border-alien-acid/30 mt-12 mb-8 text-center md:text-left flex flex-col md:flex-row justify-between text-[0.65rem] text-gray-500 uppercase tracking-widest">
-        <p>CONSORCIO XENOFUEL &copy; CICLO ESTELAR 3042.</p>
-        <p>ACCESO CLASIFICADO // <span class="text-alien-cyan">CREADOR: PABLO FIGUEROA</span></p>
+    <footer class="max-w-7xl mx-auto px-6 py-6 border-t border-alien-acid/20 mt-4 mb-4 flex flex-col md:flex-row justify-between text-[0.55rem] text-gray-500 uppercase tracking-widest">
+        <p>XENOFUEL SYNDICATE &copy; DATA DIVISION.</p>
+        <p>AUTORIZACIÓN ALPHA // <span class="text-alien-purple font-bold">ARQUITECTO: PABLO FIGUEROA</span></p>
     </footer>
 
+    <!-- Chart.js Animations & Logic -->
+    <script>
+        // Chart defaults for Sci-Fi look
+        Chart.defaults.color = '#6b7280'; // gray-500
+        Chart.defaults.font.family = "'Space Mono', monospace";
+        
+        // 1. Line Chart: Extraction Rate
+        const ctxExtraction = document.getElementById('extractionChart').getContext('2d');
+        
+        // Create gradient for line chart
+        let gradientLine = ctxExtraction.createLinearGradient(0, 0, 0, 200);
+        gradientLine.addColorStop(0, 'rgba(57, 255, 20, 0.4)'); // alien-acid
+        gradientLine.addColorStop(1, 'rgba(57, 255, 20, 0.0)');
+
+        new Chart(ctxExtraction, {
+            type: 'line',
+            data: {
+                labels: ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7'],
+                datasets: [{
+                    label: 'Materia (T-Tons)',
+                    data: [12, 19, 15, 25, 22, 30, 28],
+                    borderColor: '#39ff14',
+                    backgroundColor: gradientLine,
+                    borderWidth: 2,
+                    pointBackgroundColor: '#030705',
+                    pointBorderColor: '#39ff14',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    fill: true,
+                    tension: 0.4 // curvy lines
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(6, 15, 10, 0.9)',
+                        titleColor: '#00f3ff',
+                        bodyColor: '#39ff14',
+                        borderColor: '#39ff14',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    x: { grid: { color: 'rgba(57, 255, 20, 0.1)' } },
+                    y: { 
+                        grid: { color: 'rgba(57, 255, 20, 0.1)' },
+                        beginAtZero: true 
+                    }
+                }
+            }
+        });
+
+        // 2. Doughnut Chart: Distribution
+        const ctxDistribution = document.getElementById('distributionChart').getContext('2d');
+        new Chart(ctxDistribution, {
+            type: 'doughnut',
+            data: {
+                labels: ['Federación', 'Imperio Draconiano', 'Mercado Negro', 'Reserva Interna'],
+                datasets: [{
+                    data: [45, 35, 15, 5],
+                    backgroundColor: [
+                        '#00f3ff', // Cyan
+                        '#a3ff00', // Toxic
+                        '#b026ff', // Purple
+                        '#ff003c'  // Danger/Red
+                    ],
+                    borderColor: '#030705',
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                animation: {
+                    animateScale: true,
+                    animateRotate: true,
+                    duration: 2500
+                },
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: '#9ca3af',
+                            font: { size: 10, family: "'Space Mono', monospace" },
+                            boxWidth: 12
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(6, 15, 10, 0.9)',
+                        bodyColor: '#ffffff',
+                        borderColor: '#00f3ff',
+                        borderWidth: 1
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
