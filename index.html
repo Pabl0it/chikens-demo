@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusPulse // Data Analytics Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            900: '#0a0f1d',
+                            800: '#111827',
+                            700: '#1f293d',
+                            accent: '#06b6d4',
+                            neon: '#10b981'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cyber-900 text-gray-100 font-sans antialiased selection:bg-cyber-accent selection:text-cyber-900">
+
+    <!-- Top Glow Bar -->
+    <div class="h-1 bg-gradient-to-r from-cyber-accent via-purple-500 to-cyber-neon w-full"></div>
+
+    <!-- Navigation -->
+    <header class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center border-b border-cyber-700/50">
+        <div class="flex items-center space-x-3">
+            <div class="w-3 h-3 rounded-full bg-cyber-neon animate-pulse"></div>
+            <span class="font-display font-bold text-xl tracking-wider text-white">NEXUSPULSE<span class="text-cyber-accent">.AI</span></span>
+        </div>
+        <div class="text-sm text-gray-400 font-mono">
+            Architect: <span class="text-white font-semibold">Pablo Figueroa</span>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column: Intro & Demo Controls -->
+        <div class="lg:col-span-6 space-y-8">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyber-700/60 border border-cyber-accent/30 text-cyber-accent text-xs font-mono">
+                <span>⚡ Real-Time Predictive Engine v4.2</span>
+            </div>
+            
+            <h1 class="font-display text-4xl sm:text-6xl font-bold tracking-tight leading-none text-white">
+                Decoding <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-accent to-cyber-neon">Chaos</span> into Clarity.
+            </h1>
+            
+            <p class="text-gray-400 text-lg leading-relaxed">
+                Bienvenido al entorno de pruebas de analítica avanzada. Sube tus conjuntos de datos multidimensionales o ejecuta el flujo sintético para visualizar correlaciones ocultas en tiempo real.
+            </p>
+
+            <!-- Interactive Demo Box -->
+            <div class="p-6 bg-cyber-800 border border-cyber-700 rounded-2xl shadow-2xl space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-semibold text-gray-300">Cargar Dataset de Prueba (CSV / JSON)</span>
+                    <span class="text-xs text-cyber-neon font-mono">Status: Ready</span>
+                </div>
+                
+                <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-cyber-700 border-dashed rounded-xl cursor-pointer bg-cyber-900/50 hover:bg-cyber-700/30 transition-all group">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg class="w-8 h-8 mb-3 text-cyber-accent group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                        <p class="mb-2 text-sm text-gray-300"><span class="font-semibold text-cyber-accent">Haz clic para cargar</span> o arrastra tu archivo</p>
+                        <p class="text-xs text-gray-500">Soporta motores estocásticos de hasta 500k filas</p>
+                    </div>
+                    <input type="file" class="hidden" />
+                </label>
+
+                <button onclick="simulateAnalysis()" class="w-full py-3 px-4 bg-gradient-to-r from-cyber-accent to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-cyber-900 font-display font-bold rounded-xl transition-all shadow-lg shadow-cyber-accent/20 cursor-pointer">
+                    Ejecutar Pipeline de Análisis
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Column: Simulated Data Dashboard -->
+        <div class="lg:col-span-6">
+            <div class="bg-cyber-800 border border-cyber-700 rounded-2xl p-6 shadow-2xl space-y-6 relative overflow-hidden">
+                <!-- Decorative background grid element -->
+                <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-cyber-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="flex justify-between items-center border-b border-cyber-700 pb-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                    </div>
+                    <span class="text-xs font-mono text-gray-400">Node_Cluster_07 // Active</span>
+                </div>
+
+                <!-- Metric Cards Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-cyber-900/80 border border-cyber-700/60 rounded-xl">
+                        <span class="text-xs text-gray-400 font-mono">Precisión del Modelo</span>
+                        <h3 class="text-2xl font-display font-bold text-cyber-neon mt-1">98.42%</h3>
+                        <div class="w-full bg-cyber-700 h-1.5 rounded-full mt-3 overflow-hidden">
+                            <div class="bg-cyber-neon h-full w-[98.4%]"></div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-cyber-900/80 border border-cyber-700/60 rounded-xl">
+                        <span class="text-xs text-gray-400 font-mono">Latencia de Inferencia</span>
+                        <h3 class="text-2xl font-display font-bold text-cyber-accent mt-1">14.2 ms</h3>
+                        <div class="w-full bg-cyber-700 h-1.5 rounded-full mt-3 overflow-hidden">
+                            <div class="bg-cyber-accent h-full w-[35%]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulated Chart Graph Line View -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-mono text-gray-400">
+                        <span>Flujo de Datos Multivariable</span>
+                        <span>[Live Stream]</span>
+                    </div>
+                    <div class="h-40 bg-cyber-900/90 border border-cyber-700/60 rounded-xl p-4 flex items-end justify-between space-x-2">
+                        <div class="w-full bg-cyber-accent/20 hover:bg-cyber-accent/40 h-[40%] rounded-t transition-all"></div>
+                        <div class="w-full bg-cyber-accent/30 hover:bg-cyber-accent/50 h-[65%] rounded-t transition-all"></div>
+                        <div class="w-full bg-cyber-accent/40 hover:bg-cyber-accent/60 h-[50%] rounded-t transition-all"></div>
+                        <div class="w-full bg-cyber-neon/40 hover:bg-cyber-neon/60 h-[85%] rounded-t transition-all"></div>
+                        <div class="w-full bg-cyber-accent/50 hover:bg-cyber-accent/70 h-[70%] rounded-t transition-all"></div>
+                        <div class="w-full bg-cyber-neon hover:bg-emerald-400 h-[95%] rounded-t transition-all shadow-lg shadow-cyber-neon/30"></div>
+                    </div>
+                </div>
+
+                <div id="output-status" class="text-xs font-mono text-gray-400 text-center pt-2">
+                    Sistema listo para compilar matrices.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-7xl mx-auto px-6 py-8 mt-12 border-t border-cyber-700/50 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
+        <p>&copy; 2026 NexusPulse Analytics. Diseñado por <strong class="text-gray-300">Pablo Figueroa</strong>.</p>
+        <div class="flex space-x-6 mt-4 sm:mt-0 font-mono text-xs">
+            <span class="text-cyber-accent">#DataScience</span>
+            <span class="text-cyber-neon">#Python</span>
+            <span>#MachineLearning</span>
+        </div>
+    </footer>
+
+    <!-- Simple interactive feedback script -->
+    <script>
+        function simulateAnalysis() {
+            const status = document.getElementById('output-status');
+            status.innerHTML = '<span class="text-cyber-accent animate-pulse">⏳ Procesando tensores de datos y calculando varianza...</span>';
+            setTimeout(() => {
+                status.innerHTML = '<span class="text-cyber-neon">✔ Análisis completado con éxito. Patrones detectados sin anomalías críticas.</span>';
+            }, 1800);
+        }
+    </script>
+</body>
+</html>
