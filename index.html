@@ -3,185 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusData // Intelligence Analytics Lab</title>
+    <title>XenoFuel Syndicate // USS Leviathan</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Orbitron', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
                     },
                     colors: {
-                        brand: {
-                            50: '#f0f6ff',
-                            100: '#e0effe',
-                            200: '#bae0fd',
-                            500: '#0066ff',
-                            600: '#0052cc',
-                            900: '#0a192f',
+                        void: {
+                            900: '#030705',
+                            800: '#060f0a',
+                            700: '#0c1a12',
+                        },
+                        alien: {
+                            acid: '#39ff14',    // Neon Green
+                            toxic: '#a3ff00',   // Yellow-green
+                            cyan: '#00f3ff',    // Neon Cyan
+                            purple: '#b026ff',  // Deep purple
+                            danger: '#ff003c'   // Neon Red
                         }
+                    },
+                    boxShadow: {
+                        'neon-acid': '0 0 10px rgba(57, 255, 20, 0.5), inset 0 0 10px rgba(57, 255, 20, 0.2)',
+                        'neon-cyan': '0 0 15px rgba(0, 243, 255, 0.4)',
+                        'neon-purple': '0 0 15px rgba(176, 38, 255, 0.4)',
                     }
                 }
             }
         }
     </script>
+    <style>
+        body {
+            background-color: #030705;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(57, 255, 20, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(176, 38, 255, 0.05), transparent 25%);
+        }
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 9999;
+            position: absolute;
+            pointer-events: none;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(57,255,20,0.1) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline {
+            0% { top: -100px; }
+            100% { top: 100%; }
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030705; }
+        ::-webkit-scrollbar-thumb { background: #39ff14; border-radius: 4px; }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-brand-50 via-white to-brand-100 text-brand-900 font-sans antialiased min-h-screen selection:bg-brand-500 selection:text-white">
+<body class="text-alien-acid font-mono antialiased min-h-screen selection:bg-alien-acid selection:text-void-900 relative overflow-x-hidden">
+    <div class="scanline"></div>
 
-    <!-- Top Navigation -->
-    <header class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center border-b border-brand-200/60 backdrop-blur-md bg-white/40 sticky top-0 z-50">
-        <div class="flex items-center space-x-3">
-            <div class="w-3.5 h-3.5 rounded-full bg-brand-500 shadow-lg shadow-brand-500/50 animate-pulse"></div>
-            <span class="font-bold text-xl tracking-tight text-brand-900">NEXUS<span class="text-brand-500">ANALYTICS</span></span>
+    <!-- HUD Header -->
+    <header class="max-w-7xl mx-auto px-6 py-6 border-b border-alien-acid/30 flex flex-col md:flex-row justify-between items-center bg-void-800/80 backdrop-blur-md sticky top-0 z-50 shadow-neon-acid">
+        <div class="flex items-center space-x-4 mb-4 md:mb-0">
+            <div class="relative flex h-5 w-5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-alien-acid opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-5 w-5 bg-alien-acid"></span>
+            </div>
+            <div>
+                <h1 class="font-display font-black text-2xl tracking-widest text-white drop-shadow-[0_0_8px_rgba(57,255,20,0.8)]">XENOFUEL <span class="text-alien-acid">SYNDICATE</span></h1>
+                <p class="text-xs text-alien-cyan">Nave Nodriza: USS LEVIATHAN // Sector 7G</p>
+            </div>
         </div>
-        <div class="text-sm font-mono text-gray-600 bg-white/80 px-4 py-1.5 rounded-full border border-brand-200 shadow-sm">
-            Principal Data Architect: <span class="text-brand-600 font-bold">Pablo Figueroa</span>
+        <div class="text-right border border-alien-acid/40 px-4 py-2 bg-void-700/50 shadow-[inset_0_0_10px_rgba(57,255,20,0.1)]">
+            <p class="text-xs text-gray-400">SUPREME COMMANDER & ARCHITECT</p>
+            <p class="font-display text-sm text-alien-purple font-bold tracking-widest uppercase">Pablo Figueroa</p>
         </div>
     </header>
 
-    <!-- Main Hero Project Section -->
-    <main class="max-w-7xl mx-auto px-6 py-12 space-y-16">
+    <main class="max-w-7xl mx-auto px-6 py-10 space-y-12">
         
-        <!-- Hero Introduction -->
-        <div class="text-center max-w-3xl mx-auto space-y-4">
-            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-brand-100/80 border border-brand-200 text-brand-600 text-xs font-mono font-semibold tracking-wide">
-                <span>⚡ PROYECTO INSIGNIA: QUANTUM RETAIL INTELLIGENCE</span>
+        <!-- Project Briefing -->
+        <section class="border border-alien-cyan/50 bg-void-800/60 p-8 shadow-neon-cyan relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
+                <svg width="120" height="120" viewBox="0 0 100 100" fill="none" stroke="#00f3ff" stroke-width="1">
+                    <circle cx="50" cy="50" r="45" stroke-dasharray="4 4" class="animate-[spin_10s_linear_infinite]" />
+                    <circle cx="50" cy="50" r="30" stroke-dasharray="2 6" class="animate-[spin_15s_linear_infinite_reverse]" />
+                    <polygon points="50,25 72,65 28,65" stroke-dasharray="2 2"/>
+                </svg>
             </div>
-            <h1 class="text-4xl sm:text-6xl font-bold tracking-tight text-brand-900">
-                Transformando Datos Masivos en <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-blue-600">Estrategias de Negocio</span>
-            </h1>
-            <p class="text-gray-600 text-lg leading-relaxed">
-                Plataforma de visualización predictiva y procesamiento de cadenas de suministro globales. Desarrollada para optimizar márgenes y acelerar la toma de decisiones empresariales.
-            </p>
-        </div>
-
-        <!-- Section: 4 Business Intelligence Queries / Insights Grid -->
-        <div class="space-y-8">
-            <div class="flex items-center justify-between border-b border-brand-200 pb-4">
-                <div>
-                    <h2 class="text-2xl font-bold text-brand-900">Consultas de Negocio y Hallazgos Clave</h2>
-                    <p class="text-sm text-gray-500 font-mono">Ejecuciones de motores analíticos sobre +4.2M de registros transaccionales</p>
+            
+            <div class="relative z-10 space-y-4 max-w-3xl">
+                <div class="inline-block px-3 py-1 border border-alien-purple text-alien-purple text-xs font-bold bg-alien-purple/10 uppercase tracking-widest">
+                    Clasificación: Nivel Omega
                 </div>
-                <div class="hidden sm:block text-xs font-mono text-brand-600 bg-white px-3 py-1 rounded border border-brand-200 shadow-xs">
-                    Status: Verified & Optimal
+                <h2 class="text-3xl md:text-5xl font-display font-bold text-white uppercase drop-shadow-[0_0_5px_rgba(0,243,255,0.8)]">
+                    Proyecto <span class="text-alien-cyan">Singularidad</span>
+                </h2>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                    Extracción hiper-intensiva de isótopos de Materia Oscura y Plasma Estelar en los restos de la nebulosa de Orión. 
+                    Nuestro objetivo comercial es abastecer de combustible cuántico a las flotas de la <span class="text-alien-purple">Federación Galáctica</span> y mantener el monopolio energético con el <span class="text-alien-toxic">Imperio Draconiano</span>. El Leviathan opera al 110% de capacidad de refinería.
+                </p>
+                <div class="flex space-x-6 text-xs text-alien-cyan border-t border-alien-cyan/30 pt-4 mt-4">
+                    <span>> ESTADO: OPERATIVO</span>
+                    <span>> AMENAZA HOSTIL: BAJA</span>
+                    <span>> FASE: RECOLECCIÓN</span>
                 </div>
             </div>
+        </section>
 
-            <!-- Grid of 4 Business Queries -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <!-- Query 1 -->
-                <div class="bg-white/80 backdrop-blur-sm border border-brand-200 rounded-2xl p-6 shadow-xl shadow-brand-500/5 hover:border-brand-500 transition-all group">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-mono px-2.5 py-1 bg-brand-50 text-brand-600 rounded-md border border-brand-100">Query #01 // Segmentación</span>
-                        <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">+28.4% ROI</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-brand-900 mb-2">Identificación de Clientes de Alto LTV</h3>
-                    <p class="text-sm text-gray-600 mb-4">Análisis de correlación cruzada entre frecuencia de compra y categorías premium para optimización de campañas de retención.</p>
-                    
-                    <!-- Futuristic Mini Chart Representation -->
-                    <div class="bg-brand-50/50 rounded-xl p-4 border border-brand-100 space-y-2">
-                        <div class="flex justify-between text-xs font-mono text-gray-500">
-                            <span>Top Tier Clusters</span>
-                            <span>94.2% Confianza</span>
-                        </div>
-                        <div class="h-16 flex items-end justify-between space-x-2 pt-2">
-                            <div class="w-full bg-blue-200 h-[30%] rounded-t group-hover:bg-brand-500 transition-colors"></div>
-                            <div class="w-full bg-blue-300 h-[55%] rounded-t group-hover:bg-brand-500 transition-colors"></div>
-                            <div class="w-full bg-blue-400 h-[75%] rounded-t group-hover:bg-brand-500 transition-colors"></div>
-                            <div class="w-full bg-brand-500 h-[95%] rounded-t shadow-sm"></div>
-                        </div>
+        <!-- Metrics Dashboard -->
+        <section>
+            <div class="flex items-center justify-between mb-6 border-b border-alien-acid/30 pb-2">
+                <h3 class="font-display text-xl text-alien-acid tracking-widest uppercase">
+                    Telemetría y Rendimiento Comercial (15 Métricas)
+                </h3>
+                <span class="text-xs bg-alien-acid text-void-900 px-2 py-1 font-bold animate-pulse">LIVE LINK ACTIVE</span>
+            </div>
+
+            <!-- Grid 5 columns on large screens, 3 on medium, 1 on small -->
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+
+                <!-- Metric 1 -->
+                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors shadow-[inset_0_0_8px_rgba(57,255,20,0.1)]">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Materia Extraída</p>
+                    <p class="font-display text-2xl text-white">4.82 <span class="text-sm text-alien-acid">T-Tons</span></p>
+                </div>
+
+                <!-- Metric 2 -->
+                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors shadow-[inset_0_0_8px_rgba(57,255,20,0.1)]">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Pureza de Plasma</p>
+                    <div class="flex items-end justify-between">
+                        <p class="font-display text-2xl text-alien-cyan">99.4%</p>
+                        <div class="w-12 h-1 bg-void-900 mb-2"><div class="h-full bg-alien-cyan w-[99.4%]"></div></div>
                     </div>
                 </div>
 
-                <!-- Query 2 -->
-                <div class="bg-white/80 backdrop-blur-sm border border-brand-200 rounded-2xl p-6 shadow-xl shadow-brand-500/5 hover:border-brand-500 transition-all group">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-mono px-2.5 py-1 bg-brand-50 text-brand-600 rounded-md border border-brand-100">Query #02 // Logística</span>
-                        <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">-19.2% Costos</span>
+                <!-- Metric 3 -->
+                <div class="border border-alien-purple/50 bg-void-800 p-4 hover:bg-void-700 transition-colors shadow-[inset_0_0_8px_rgba(176,38,255,0.15)] relative overflow-hidden">
+                    <div class="absolute right-0 top-0 h-full w-1 bg-alien-purple"></div>
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Ingresos (Créditos)</p>
+                    <p class="font-display text-xl text-alien-purple font-bold">⌬ 842.5 Billones</p>
+                </div>
+
+                <!-- Metric 4 -->
+                <div class="border border-alien-danger/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Integridad de Casco</p>
+                    <p class="font-display text-2xl text-alien-toxic">88.2%</p>
+                    <p class="text-[0.6rem] text-alien-danger mt-1">> Requiere Mantenimiento</p>
+                </div>
+
+                <!-- Metric 5 -->
+                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors shadow-[inset_0_0_8px_rgba(57,255,20,0.1)]">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Satisfacción Draconiana</p>
+                    <div class="flex space-x-1 mt-2">
+                        <div class="h-4 w-full bg-alien-acid"></div>
+                        <div class="h-4 w-full bg-alien-acid"></div>
+                        <div class="h-4 w-full bg-alien-acid"></div>
+                        <div class="h-4 w-full bg-alien-acid"></div>
+                        <div class="h-4 w-full border border-alien-acid bg-transparent"></div>
                     </div>
-                    <h3 class="text-lg font-bold text-brand-900 mb-2">Optimización de Rutas de Distribución</h3>
-                    <p class="text-sm text-gray-600 mb-4">Modelo geoespacial para minimizar tiempos de tránsito y consumo de combustible en centros logísticos regionales.</p>
-                    
-                    <!-- Futuristic Mini Chart Representation -->
-                    <div class="bg-brand-50/50 rounded-xl p-4 border border-brand-100 space-y-2">
-                        <div class="flex justify-between text-xs font-mono text-gray-500">
-                            <span>Eficiencia Temporal</span>
-                            <span>Reducción de Latencia</span>
-                        </div>
-                        <div class="h-16 flex items-end justify-between space-x-2 pt-2">
-                            <div class="w-full bg-blue-200 h-[80%] rounded-t group-hover:bg-blue-600 transition-colors"></div>
-                            <div class="w-full bg-blue-300 h-[60%] rounded-t group-hover:bg-blue-600 transition-colors"></div>
-                            <div class="w-full bg-brand-500 h-[40%] rounded-t transition-colors"></div>
-                            <div class="w-full bg-blue-600 h-[20%] rounded-t shadow-sm"></div>
-                        </div>
+                    <p class="text-[0.6rem] text-right mt-1">Nivel 4/5</p>
+                </div>
+
+                <!-- Metric 6 -->
+                <div class="border border-alien-cyan/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Drones Recolectores</p>
+                    <p class="font-display text-2xl text-white">14,052</p>
+                    <p class="text-[0.6rem] text-alien-cyan mt-1">Activos en enjambre</p>
+                </div>
+
+                <!-- Metric 7 -->
+                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Impuestos Federales</p>
+                    <p class="font-display text-xl text-alien-danger">- ⌬ 12.4 B</p>
+                    <p class="text-[0.6rem] text-gray-500 mt-1">Tarifa fronteriza pagada</p>
+                </div>
+
+                <!-- Metric 8 -->
+                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors flex flex-col justify-between">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Cuerpos Minados</p>
+                    <p class="font-display text-3xl text-alien-acid">127</p>
+                </div>
+
+                <!-- Metric 9 -->
+                <div class="border border-alien-toxic/40 bg-void-800 p-4 hover:bg-void-700 transition-colors shadow-[inset_0_0_8px_rgba(163,255,0,0.1)]">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Reserva Hyper-Jump</p>
+                    <p class="font-display text-2xl text-alien-toxic">100%</p>
+                    <div class="h-1 w-full bg-alien-toxic shadow-[0_0_5px_#a3ff00] mt-2"></div>
+                </div>
+
+                <!-- Metric 10 -->
+                <div class="border border-alien-purple/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Radiación Interna</p>
+                    <p class="font-display text-xl text-white">0.04 <span class="text-alien-purple text-sm">Sieverts/h</span></p>
+                    <p class="text-[0.6rem] text-alien-acid mt-1">Límites seguros</p>
+                </div>
+
+                <!-- Metric 11 -->
+                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Intercepciones Pirata</p>
+                    <p class="font-display text-2xl text-white">04</p>
+                    <p class="text-[0.6rem] text-alien-danger mt-1">Todas neutralizadas</p>
+                </div>
+
+                <!-- Metric 12 -->
+                <div class="border border-alien-cyan/40 bg-void-800 p-4 hover:bg-void-700 transition-colors relative">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Temp. Núcleo Refinería</p>
+                    <p class="font-display text-2xl text-alien-cyan">8.4M <span class="text-sm">K</span></p>
+                    <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-alien-cyan to-alien-danger"></div>
+                </div>
+
+                <!-- Metric 13 -->
+                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Tasa de Decaimiento</p>
+                    <p class="font-display text-xl text-alien-toxic">0.00012% / ciclo</p>
+                </div>
+
+                <!-- Metric 14 -->
+                <div class="border border-alien-acid/40 bg-void-800 p-4 hover:bg-void-700 transition-colors">
+                    <p class="text-[0.65rem] text-gray-400 uppercase tracking-wider mb-1">Vitalidad Tripulación</p>
+                    <div class="flex items-center space-x-2 mt-1">
+                        <div class="w-3 h-3 rounded-full bg-alien-acid shadow-[0_0_5px_#39ff14]"></div>
+                        <span class="text-lg text-white font-display">ÓPTIMA</span>
                     </div>
                 </div>
 
-                <!-- Query 3 -->
-                <div class="bg-white/80 backdrop-blur-sm border border-brand-200 rounded-2xl p-6 shadow-xl shadow-brand-500/5 hover:border-brand-500 transition-all group">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-mono px-2.5 py-1 bg-brand-50 text-brand-600 rounded-md border border-brand-100">Query #03 // Inventarios</span>
-                        <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Stock 99.8%</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-brand-900 mb-2">Predicción de Demanda Estacional</h3>
-                    <p class="text-sm text-gray-600 mb-4">Algoritmo de series temporales (ARIMA / LSTM) para anticipar quiebres de stock en temporadas de alto tráfico de compras.</p>
-                    
-                    <!-- Futuristic Mini Chart Representation -->
-                    <div class="bg-brand-50/50 rounded-xl p-4 border border-brand-100 space-y-2">
-                        <div class="flex justify-between text-xs font-mono text-gray-500">
-                            <span>Demanda Proyectada</span>
-                            <span>Curva Estable</span>
-                        </div>
-                        <div class="h-16 flex items-end justify-between space-x-2 pt-2">
-                            <div class="w-full bg-blue-300 h-[40%] rounded-t group-hover:bg-brand-500 transition-colors"></div>
-                            <div class="w-full bg-blue-400 h-[60%] rounded-t group-hover:bg-brand-500 transition-colors"></div>
-                            <div class="w-full bg-brand-500 h-[85%] rounded-t group-hover:bg-brand-500 transition-colors"></div>
-                            <div class="w-full bg-blue-600 h-[100%] rounded-t shadow-sm"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Query 4 -->
-                <div class="bg-white/80 backdrop-blur-sm border border-brand-200 rounded-2xl p-6 shadow-xl shadow-brand-500/5 hover:border-brand-500 transition-all group">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-mono px-2.5 py-1 bg-brand-50 text-brand-600 rounded-md border border-brand-100">Query #04 // Churn Rate</span>
-                        <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">-14.5% Fuga</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-brand-900 mb-2">Modelado de Abandono de Suscriptores</h3>
-                    <p class="text-sm text-gray-600 mb-4">Detección temprana de señales de fricción mediante árboles de decisión para accionar alertas automatizadas de retención.</p>
-                    
-                    <!-- Futuristic Mini Chart Representation -->
-                    <div class="bg-brand-50/50 rounded-xl p-4 border border-brand-100 space-y-2">
-                        <div class="flex justify-between text-xs font-mono text-gray-500">
-                            <span>Retención Efectiva</span>
-                            <span>Estabilizado</span>
-                        </div>
-                        <div class="h-16 flex items-end justify-between space-x-2 pt-2">
-                            <div class="w-full bg-blue-200 h-[50%] rounded-t group-hover:bg-blue-500 transition-colors"></div>
-                            <div class="w-full bg-blue-400 h-[70%] rounded-t group-hover:bg-blue-500 transition-colors"></div>
-                            <div class="w-full bg-brand-500 h-[88%] rounded-t group-hover:bg-blue-500 transition-colors"></div>
-                            <div class="w-full bg-blue-600 h-[92%] rounded-t shadow-sm"></div>
-                        </div>
+                <!-- Metric 15 -->
+                <div class="border border-alien-purple/40 bg-void-800 p-4 hover:bg-void-700 transition-colors relative flex items-center justify-center group overflow-hidden">
+                    <div class="absolute w-[200%] h-[200%] bg-alien-purple/10 animate-[spin_4s_linear_infinite] group-hover:bg-alien-purple/20"></div>
+                    <div class="relative z-10 text-center">
+                        <p class="text-[0.65rem] text-gray-300 uppercase tracking-wider mb-1">Eficiencia Extracción</p>
+                        <p class="font-display text-2xl font-bold text-white drop-shadow-[0_0_5px_rgba(176,38,255,0.8)]">99.9%</p>
                     </div>
                 </div>
 
             </div>
-        </div>
+        </section>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="max-w-7xl mx-auto px-6 py-12 mt-20 border-t border-brand-200/60 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
-        <p>&copy; 2026 NexusAnalytics Lab. Arquitectura creada por <strong class="text-brand-900">Pablo Figueroa</strong>.</p>
-        <div class="flex space-x-6 mt-4 sm:mt-0 font-mono text-xs text-brand-600">
-            <span>#DataScience</span>
-            <span>#BusinessIntelligence</span>
-            <span>#GitHubPages</span>
-        </div>
+    <!-- Footer HUD -->
+    <footer class="max-w-7xl mx-auto px-6 py-6 border-t border-alien-acid/30 mt-12 mb-8 text-center md:text-left flex flex-col md:flex-row justify-between text-[0.65rem] text-gray-500 uppercase tracking-widest">
+        <p>CONSORCIO XENOFUEL &copy; CICLO ESTELAR 3042.</p>
+        <p>ACCESO CLASIFICADO // <span class="text-alien-cyan">CREADOR: PABLO FIGUEROA</span></p>
     </footer>
 
 </body>
