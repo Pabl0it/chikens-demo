@@ -1,61 +1,116 @@
-JavaScript
-// Configuración global estética clínica de laboratorio (Azul / Blanco luminoso)
-Chart.defaults.color = '#bae6fd';
-Chart.defaults.font.family = 'Special Elite';
+// Base de datos de métricas para generar dinámicamente las gráficas al hacer clic
+const metricsDatabase = {
+    1: { name: "Extracción Total", unit: "kT", type: "line", base: 2880.72 },
+    2: { name: "Extracción Prom. Diaria", unit: "kT", type: "bar", base: 28.81 },
+    3: { name: "Extracción Máx. Diaria", unit: "kT", type: "line", base: 49.48 },
+    4: { name: "Extracción Mín. Diaria", unit: "kT", type: "bar", base: 10.22 },
+    5: { name: "Ingresos Totales", unit: "M ⌬", type: "line", base: 1495.66 },
+    6: { name: "Ingreso Prom. Diario", unit: "M ⌬", type: "bar", base: 14.96 },
+    7: { name: "Ingreso Máx. Diario", unit: "M ⌬", type: "line", base: 24.71 },
+    8: { name: "Margen Ganancia / kT", unit: "M ⌬", type: "bar", base: 0.52 },
+    9: { name: "Eficiencia Motores", unit: "%", type: "line", base: 92.25 },
+    10: { name: "Temp. Prom. Núcleo", unit: "°C", type: "bar", base: 571.90 },
+    11: { name: "Temp. Máx. Registrada", unit: "°C", type: "line", base: 746.68 },
+    12: { name: "Consumo Energético Tot.", unit: "MW", type: "bar", base: 20320.92 },
+    13: { name: "Consumo Promedio", unit: "MW", type: "line", base: 203.21 },
+    14: { name: "Promedio Drones Activos", unit: "Un", type: "bar", base: 100.59 },
+    15: { name: "Máximo Drones Despl.", unit: "Un", type: "line", base: 148 },
+    16: { name: "Fugas Totales Reg.", unit: "Alertas", type: "bar", base: 16 },
+    17: { name: "Días sin Fugas", unit: "Días", type: "line", base: 86 },
+    18: { name: "Tasa Fugas Crítica", unit: "%", type: "bar", base: 14.00 },
+    19: { name: "Días en Estado Óptimo", unit: "Días", type: "line", base: 65 },
+    20: { name: "Días en Mantenimiento", unit: "Días", type: "bar", base: 9 }
+};
 
-// Gráfico 1: Línea de Producción luminosa
-const ctx1 = document.getElementById('chartProduccion').getContext('2d');
-new Chart(ctx1, {
-    type: 'line',
-    data: {
-        labels: ['Día 1', 'Día 20', 'Día 40', 'Día 60', 'Día 80', 'Día 100'],
-        datasets: [{
-            label: 'Extracción (kT)',
-            data: [15, 38, 22, 45, 30, 49],
-            borderColor: '#38bdf8',
-            backgroundColor: 'rgba(56, 189, 248, 0.25)',
-            borderWidth: 3,
-            fill: true,
-            tension: 0.2
-        }]
-    },
-    options: { 
-        responsive: true, 
-        maintainAspectRatio: false,
-        animation: {
-            duration: 2000,
-            easing: 'easeOutQuart'
-        },
-        scales: {
-            grid: { color: '#1e293b' },
-            ticks: { color: '#bae6fd' }
-        }
-    }
+// Instancias globales de Chart.js para V1 y V2
+let chartV1Instance = null;
+let chartV2Instance = null;
+
+// Inicialización de Gráficas por defecto al cargar la página
+window.addEventListener('DOMContentLoaded', () => {
+    renderizarGrafico('V1', 1); // Carga métrica 1 en Ventana 1 por defecto
+    renderizarGrafico('V2', 10); // Carga métrica 10 en Ventana 2 por defecto
 });
 
-// Gráfico 2: Temperatura por Sector con paleta azul, blanca y celeste
-const ctx2 = document.getElementById('chartTemperatura').getContext('2d');
-new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: ['Sector Alfa', 'Sector Beta', 'Sector Gamma', 'Sector Delta'],
-        datasets: [{
-            label: 'Temperatura Promedio (°C)',
-            data: [540, 610, 490, 680],
-            backgroundColor: ['#38bdf8', '#ffffff', '#0284c7', '#93c5fd'],
-            borderColor: '#0f172a',
-            borderWidth: 2
-        }]
-    },
-    options: { 
-        responsive: true, 
-        maintainAspectRatio: false,
-        animation: {
-            duration: 2500,
-            easing: 'easeInOutExpo'
-        },
-        scales: {
-            grid: { color: '#1e293b' }
-        }
+// Función central para actualizar Ventana 1 (V1) o Ventana 2 (V2)
+function cargarMetrica(id, ventana) {
+    renderizarGrafico(ventana, id);
+}
+
+function renderizarGrafico(ventana, id) {
+    const info = metricsDatabase[id];
+    if (!info) return;
+
+    // Generar datos variados basados en el valor base para que luzca realista
+    const labels = ['Fase 1', 'Fase 2', 'Fase 3', 'Fase 4', 'Fase 5', 'Fase 6'];
+    const dataValues = [
+        info.base * 0.7,
+        info.base * 0.85,
+        info.base * 0.95,
+        info.base * 1.02,
+        info.base * 0.9,
+        info.base
+    ];
+
+    if (ventana === 'V1') {
+        document.getElementById('tituloV1').textContent = `> V1: ${info.name.toUpperCase()} (${info.unit})`;
+        const ctx = document.getElementById('chartV1').getContext('2d');
+        
+        if (chartV1Instance) chartV1Instance.destroy();
+        
+        chartV1Instance = new Chart(ctx, {
+            type: info.type,
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: `${info.name} (${info.unit})`,
+                    data: dataValues,
+                    borderColor: '#0284c7',
+                    backgroundColor: info.type === 'line' ? 'rgba(2, 132, 199, 0.15)' : '#0284c7',
+                    borderWidth: 3,
+                    fill: info.type === 'line',
+                    tension: 0.2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 1000, easing: 'easeOutQuart' },
+                scales: {
+                    grid: { color: '#e2e8f0' },
+                    ticks: { color: '#0f172a' }
+                }
+            }
+        });
+    } else {
+        document.getElementById('tituloV2').textContent = `> V2: ${info.name.toUpperCase()} (${info.unit})`;
+        const ctx = document.getElementById('chartV2').getContext('2d');
+        
+        if (chartV2Instance) chartV2Instance.destroy();
+        
+        chartV2Instance = new Chart(ctx, {
+            type: info.type === 'line' ? 'bar' : 'line', // Alternar tipo para variedad visual en V2
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: `${info.name} (${info.unit})`,
+                    data: dataValues,
+                    borderColor: '#0e7490',
+                    backgroundColor: info.type === 'line' ? '#0e7490' : 'rgba(14, 116, 144, 0.25)',
+                    borderWidth: 3,
+                    fill: info.type !== 'line',
+                    tension: 0.2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 1000, easing: 'easeInOutExpo' },
+                scales: {
+                    grid: { color: '#e2e8f0' },
+                    ticks: { color: '#0f172a' }
+                }
+            }
+        });
     }
-});
+}
