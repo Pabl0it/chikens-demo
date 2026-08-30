@@ -1,4 +1,3 @@
-// Base de datos completa con los datos reales y nombres para las 20 métricas
 const metricsDatabase = {
     1: { name: "Extracción Total", unit: "kT", type: "line", base: 2880.72 },
     2: { name: "Extracción Prom. Diaria", unit: "kT", type: "bar", base: 28.81 },
@@ -22,91 +21,84 @@ const metricsDatabase = {
     20: { name: "Días en Mantenimiento", unit: "Días", type: "bar", base: 9 }
 };
 
-// Instancias globales para controlar y destruir gráficos previos al actualizar
 let chartV1Instance = null;
 let chartV2Instance = null;
 
-// Cargar gráficos iniciales al abrir la página
+// Inicializamos cargando por defecto dos métricas al arrancar
 window.addEventListener('DOMContentLoaded', () => {
-    cargarMetrica(1, 'V1');  // Métrica 1 en Ventana 1 por defecto
-    cargarMetrica(10, 'V2'); // Métrica 10 en Ventana 2 por defecto
+    cargarMetricaEnVentana(1, 'V1');
+    cargarMetricaEnVentana(5, 'V2');
 });
 
-// Función ejecutada al hacer clic en los botones de las tarjetas
-function cargarMetrica(id, ventana) {
-    const info = metricsDatabase[id];
-    if (!info) return;
+function cargarMetricaEnVentana(idMetrica, ventanaDestino) {
+    const metrica = metricsDatabase[idMetrica];
+    if (!metrica) return;
 
-    // Generar 6 puntos simulados realistas basados en el valor base de la métrica
+    // Generamos puntos de tendencia simulados según el valor base de la tarjeta
     const labels = ['Fase 1', 'Fase 2', 'Fase 3', 'Fase 4', 'Fase 5', 'Fase 6'];
-    const dataValues = [
-        Number((info.base * 0.75).toFixed(2)),
-        Number((info.base * 0.88).toFixed(2)),
-        Number((info.base * 0.94).toFixed(2)),
-        Number((info.base * 1.03).toFixed(2)),
-        Number((info.base * 0.92).toFixed(2)),
-        Number(info.base.toFixed(2))
+    const valores = [
+        Number((metrica.base * 0.75).toFixed(2)),
+        Number((metrica.base * 0.88).toFixed(2)),
+        Number((metrica.base * 0.94).toFixed(2)),
+        Number((metrica.base * 1.03).toFixed(2)),
+        Number((metrica.base * 0.92).toFixed(2)),
+        Number(metrica.base.toFixed(2))
     ];
 
-    if (ventana === 'V1') {
-        document.getElementById('tituloV1').textContent = `> V1: ${info.name.toUpperCase()} (${info.unit})`;
+    if (ventanaDestino === 'V1') {
+        document.getElementById('tituloV1').textContent = `> V1: ${metrica.name.toUpperCase()} (${metrica.unit})`;
         const ctx = document.getElementById('chartV1').getContext('2d');
         
-        if (chartV1Instance) {
-            chartV1Instance.destroy();
-        }
-        
+        if (chartV1Instance) chartV1Instance.destroy();
+
         chartV1Instance = new Chart(ctx, {
-            type: info.type,
+            type: metrica.type,
             data: {
                 labels: labels,
                 datasets: [{
-                    label: `${info.name} (${info.unit})`,
-                    data: dataValues,
+                    label: `${metrica.name} (${metrica.unit})`,
+                    data: valores,
                     borderColor: '#0284c7',
-                    backgroundColor: info.type === 'line' ? 'rgba(2, 132, 199, 0.15)' : '#0284c7',
+                    backgroundColor: metrica.type === 'line' ? 'rgba(2, 132, 199, 0.15)' : '#0284c7',
                     borderWidth: 3,
-                    fill: info.type === 'line',
+                    fill: metrica.type === 'line',
                     tension: 0.2
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: { duration: 800, easing: 'easeOutQuart' },
+                animation: { duration: 600 },
                 scales: {
                     grid: { color: '#e2e8f0' },
                     ticks: { color: '#0f172a' }
                 }
             }
         });
-    } else if (ventana === 'V2') {
-        document.getElementById('tituloV2').textContent = `> V2: ${info.name.toUpperCase()} (${info.unit})`;
+    } else if (ventanaDestino === 'V2') {
+        document.getElementById('tituloV2').textContent = `> V2: ${metrica.name.toUpperCase()} (${metrica.unit})`;
         const ctx = document.getElementById('chartV2').getContext('2d');
         
-        if (chartV2Instance) {
-            chartV2Instance.destroy();
-        }
-        
+        if (chartV2Instance) chartV2Instance.destroy();
+
         chartV2Instance = new Chart(ctx, {
-            // Si el original es de línea, en V2 podemos alternarlo a barra o viceversa para enriquecer
-            type: info.type === 'line' ? 'bar' : 'line',
+            type: metrica.type === 'line' ? 'bar' : 'line',
             data: {
                 labels: labels,
                 datasets: [{
-                    label: `${info.name} (${info.unit})`,
-                    data: dataValues,
+                    label: `${metrica.name} (${metrica.unit})`,
+                    data: valores,
                     borderColor: '#0e7490',
-                    backgroundColor: info.type === 'line' ? '#0e7490' : 'rgba(14, 116, 144, 0.25)',
+                    backgroundColor: metrica.type === 'line' ? '#0e7490' : 'rgba(14, 116, 144, 0.25)',
                     borderWidth: 3,
-                    fill: info.type !== 'line',
+                    fill: metrica.type !== 'line',
                     tension: 0.2
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: { duration: 800, easing: 'easeInOutExpo' },
+                animation: { duration: 600 },
                 scales: {
                     grid: { color: '#e2e8f0' },
                     ticks: { color: '#0f172a' }
