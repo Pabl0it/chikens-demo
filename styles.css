@@ -1,18 +1,18 @@
 body {
-    background-color: #f0f9ff; /* Fondo luminoso blanco / celeste claro */
+    background-color: #f0f9ff; /* Fondo luminoso blanco y celeste ultra claro */
     color: #0f172a;
     font-family: 'Special Elite', monospace;
     background-image: 
-        radial-gradient(rgba(14, 116, 144, 0.08) 1px, transparent 0),
-        linear-gradient(rgba(255, 255, 255, 0.6) 50%, rgba(224, 242, 254, 0.4) 50%);
+        radial-gradient(rgba(14, 116, 144, 0.1) 1px, transparent 0),
+        linear-gradient(rgba(255, 255, 255, 0.9) 50%, rgba(224, 242, 254, 0.6) 50%);
     background-size: 8px 8px, 100% 4px;
 }
 
-/* Pantalla de laboratorio de alta luminosidad */
+/* Pantalla de laboratorio luminosa estilo sala blanca */
 .lab-screen {
-    background-color: #f8fafc;
+    background-color: #ffffff;
     border: 3px solid #0284c7;
-    box-shadow: inset 0 0 15px rgba(2, 132, 199, 0.1), 0 0 10px rgba(2, 132, 199, 0.15);
+    box-shadow: inset 0 0 15px rgba(2, 132, 199, 0.1), 0 0 12px rgba(2, 132, 199, 0.2);
     position: relative;
     overflow: hidden;
 }
@@ -32,8 +32,8 @@ body {
 .scanline {
     width: 100%;
     height: 2px;
-    background: rgba(2, 132, 199, 0.6);
-    box-shadow: 0 0 10px #0284c7;
+    background: rgba(2, 132, 199, 0.8);
+    box-shadow: 0 0 10px #0284c7, 0 0 5px #ffffff;
     position: absolute;
     top: 0;
     left: 0;
@@ -47,7 +47,7 @@ body {
     100% { top: 100%; }
 }
 
-/* Paneles Estilo Cómic con estética luminosa y sombras marcadas */
+/* Paneles Estilo Cómic Luminoso */
 .comic-panel {
     background-color: #ffffff;
     border: 4px solid #0f172a;

@@ -1,4 +1,4 @@
-// Base de datos de métricas para generar dinámicamente las gráficas al hacer clic
+// Base de datos completa con los datos reales y nombres para las 20 métricas
 const metricsDatabase = {
     1: { name: "Extracción Total", unit: "kT", type: "line", base: 2880.72 },
     2: { name: "Extracción Prom. Diaria", unit: "kT", type: "bar", base: 28.81 },
@@ -22,41 +22,39 @@ const metricsDatabase = {
     20: { name: "Días en Mantenimiento", unit: "Días", type: "bar", base: 9 }
 };
 
-// Instancias globales de Chart.js para V1 y V2
+// Instancias globales para controlar y destruir gráficos previos al actualizar
 let chartV1Instance = null;
 let chartV2Instance = null;
 
-// Inicialización de Gráficas por defecto al cargar la página
+// Cargar gráficos iniciales al abrir la página
 window.addEventListener('DOMContentLoaded', () => {
-    renderizarGrafico('V1', 1); // Carga métrica 1 en Ventana 1 por defecto
-    renderizarGrafico('V2', 10); // Carga métrica 10 en Ventana 2 por defecto
+    cargarMetrica(1, 'V1');  // Métrica 1 en Ventana 1 por defecto
+    cargarMetrica(10, 'V2'); // Métrica 10 en Ventana 2 por defecto
 });
 
-// Función central para actualizar Ventana 1 (V1) o Ventana 2 (V2)
+// Función ejecutada al hacer clic en los botones de las tarjetas
 function cargarMetrica(id, ventana) {
-    renderizarGrafico(ventana, id);
-}
-
-function renderizarGrafico(ventana, id) {
     const info = metricsDatabase[id];
     if (!info) return;
 
-    // Generar datos variados basados en el valor base para que luzca realista
+    // Generar 6 puntos simulados realistas basados en el valor base de la métrica
     const labels = ['Fase 1', 'Fase 2', 'Fase 3', 'Fase 4', 'Fase 5', 'Fase 6'];
     const dataValues = [
-        info.base * 0.7,
-        info.base * 0.85,
-        info.base * 0.95,
-        info.base * 1.02,
-        info.base * 0.9,
-        info.base
+        Number((info.base * 0.75).toFixed(2)),
+        Number((info.base * 0.88).toFixed(2)),
+        Number((info.base * 0.94).toFixed(2)),
+        Number((info.base * 1.03).toFixed(2)),
+        Number((info.base * 0.92).toFixed(2)),
+        Number(info.base.toFixed(2))
     ];
 
     if (ventana === 'V1') {
         document.getElementById('tituloV1').textContent = `> V1: ${info.name.toUpperCase()} (${info.unit})`;
         const ctx = document.getElementById('chartV1').getContext('2d');
         
-        if (chartV1Instance) chartV1Instance.destroy();
+        if (chartV1Instance) {
+            chartV1Instance.destroy();
+        }
         
         chartV1Instance = new Chart(ctx, {
             type: info.type,
@@ -75,21 +73,24 @@ function renderizarGrafico(ventana, id) {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: { duration: 1000, easing: 'easeOutQuart' },
+                animation: { duration: 800, easing: 'easeOutQuart' },
                 scales: {
                     grid: { color: '#e2e8f0' },
                     ticks: { color: '#0f172a' }
                 }
             }
         });
-    } else {
+    } else if (ventana === 'V2') {
         document.getElementById('tituloV2').textContent = `> V2: ${info.name.toUpperCase()} (${info.unit})`;
         const ctx = document.getElementById('chartV2').getContext('2d');
         
-        if (chartV2Instance) chartV2Instance.destroy();
+        if (chartV2Instance) {
+            chartV2Instance.destroy();
+        }
         
         chartV2Instance = new Chart(ctx, {
-            type: info.type === 'line' ? 'bar' : 'line', // Alternar tipo para variedad visual en V2
+            // Si el original es de línea, en V2 podemos alternarlo a barra o viceversa para enriquecer
+            type: info.type === 'line' ? 'bar' : 'line',
             data: {
                 labels: labels,
                 datasets: [{
@@ -105,7 +106,7 @@ function renderizarGrafico(ventana, id) {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: { duration: 1000, easing: 'easeInOutExpo' },
+                animation: { duration: 800, easing: 'easeInOutExpo' },
                 scales: {
                     grid: { color: '#e2e8f0' },
                     ticks: { color: '#0f172a' }

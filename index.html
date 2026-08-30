@@ -61,231 +61,231 @@
     </div>
 
     <h2 class="text-2xl comic-header text-blue-900 mb-4 tracking-wider">&gt; PANEL DE CONTROL INTERACTIVO (20 MÉTRICAS)</h2>
-    <p class="text-xs text-slate-600 mb-4 font-mono">* Haz clic en [V1] o [V2] en cualquier tarjeta para proyectar su gráfica en tiempo real en las pantallas superiores.</p>
+    <p class="text-xs text-slate-600 mb-4 font-mono">* Haz clic en [→ V1] o [→ V2] en cualquier tarjeta para proyectar su gráfica en tiempo real en las pantallas superiores.</p>
     
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="contenedorMetricas">
         
         <!-- Bloque 1: Producción -->
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-blue-500 flex flex-col justify-between" data-id="1" data-nombre="Extracción Total" data-val="2880.72" data-unit="kT">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-blue-500 flex flex-col justify-between" data-id="1">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">1. Extracción Total</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">2,880.72 <span class="text-xs text-blue-600">kT</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(1, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(1, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(1, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(1, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-blue-500 flex flex-col justify-between" data-id="2" data-nombre="Extracción Prom. Diaria" data-val="28.81" data-unit="kT">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-blue-500 flex flex-col justify-between" data-id="2">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">2. Extracción Prom. Diaria</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">28.81 <span class="text-xs text-blue-600">kT</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(2, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(2, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(2, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(2, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-blue-500 flex flex-col justify-between" data-id="3" data-nombre="Extracción Máx. Diaria" data-val="49.48" data-unit="kT">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-blue-500 flex flex-col justify-between" data-id="3">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">3. Extracción Máx. Diaria</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">49.48 <span class="text-xs text-blue-600">kT</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(3, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(3, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(3, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(3, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-blue-500 flex flex-col justify-between" data-id="4" data-nombre="Extracción Mín. Diaria" data-val="10.22" data-unit="kT">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-blue-500 flex flex-col justify-between" data-id="4">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">4. Extracción Mín. Diaria</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">10.22 <span class="text-xs text-blue-600">kT</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(4, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(4, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(4, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(4, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
         <!-- Bloque 2: Finanzas -->
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-cyan-500 flex flex-col justify-between" data-id="5" data-nombre="Ingresos Totales" data-val="1495.66" data-unit="M ⌬">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-cyan-500 flex flex-col justify-between" data-id="5">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">5. Ingresos Totales</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">1,495.66 <span class="text-xs text-cyan-600">M ⌬</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(5, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(5, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(5, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(5, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-cyan-500 flex flex-col justify-between" data-id="6" data-nombre="Ingreso Prom. Diario" data-val="14.96" data-unit="M ⌬">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-cyan-500 flex flex-col justify-between" data-id="6">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">6. Ingreso Prom. Diario</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">14.96 <span class="text-xs text-cyan-600">M ⌬</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(6, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(6, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(6, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(6, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-cyan-500 flex flex-col justify-between" data-id="7" data-nombre="Ingreso Máx. Diario" data-val="24.71" data-unit="M ⌬">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-cyan-500 flex flex-col justify-between" data-id="7">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">7. Ingreso Máx. Diario</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">24.71 <span class="text-xs text-cyan-600">M ⌬</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(7, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(7, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(7, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(7, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-cyan-500 flex flex-col justify-between" data-id="8" data-nombre="Margen Ganancia / kT" data-val="0.52" data-unit="M ⌬">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-cyan-500 flex flex-col justify-between" data-id="8">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">8. Margen Ganancia / kT</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">0.52 <span class="text-xs text-cyan-600">M ⌬</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(8, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(8, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(8, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(8, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
         <!-- Bloque 3: Motores y Energía -->
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-indigo-500 flex flex-col justify-between" data-id="9" data-nombre="Eficiencia Motores" data-val="92.25" data-unit="%">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-indigo-500 flex flex-col justify-between" data-id="9">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">9. Eficiencia Motores</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">92.25 <span class="text-xs text-indigo-600">%</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(9, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(9, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(9, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(9, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-indigo-500 flex flex-col justify-between" data-id="10" data-nombre="Temp. Prom. Núcleo" data-val="571.90" data-unit="°C">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-indigo-500 flex flex-col justify-between" data-id="10">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">10. Temp. Prom. Núcleo</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">571.90 <span class="text-xs text-indigo-600">°C</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(10, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(10, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(10, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(10, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-indigo-500 flex flex-col justify-between" data-id="11" data-nombre="Temp. Máx. Registrada" data-val="746.68" data-unit="°C">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-indigo-500 flex flex-col justify-between" data-id="11">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">11. Temp. Máx. Registrada</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">746.68 <span class="text-xs text-indigo-600">°C</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(11, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(11, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(11, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(11, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-indigo-500 flex flex-col justify-between" data-id="12" data-nombre="Consumo Energético Tot." data-val="20320.92" data-unit="MW">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-indigo-500 flex flex-col justify-between" data-id="12">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">12. Consumo Energético Tot.</p>
                 <p class="text-xl font-bold text-slate-900 mt-1 font-mono">20,320.92 <span class="text-xs text-indigo-600">MW</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(12, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(12, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(12, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(12, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-indigo-500 flex flex-col justify-between" data-id="13" data-nombre="Consumo Promedio" data-val="203.21" data-unit="MW">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-indigo-500 flex flex-col justify-between" data-id="13">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">13. Consumo Promedio</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">203.21 <span class="text-xs text-indigo-600">MW</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(13, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(13, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(13, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(13, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
         <!-- Bloque 4: Operaciones y Seguridad -->
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-teal-500 flex flex-col justify-between" data-id="14" data-nombre="Promedio Drones Activos" data-val="100.59" data-unit="Un">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-teal-500 flex flex-col justify-between" data-id="14">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">14. Promedio Drones Activos</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">100.59 <span class="text-xs text-teal-600">Un</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(14, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(14, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(14, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(14, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-teal-500 flex flex-col justify-between" data-id="15" data-nombre="Máximo Drones Despl." data-val="148" data-unit="Un">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-teal-500 flex flex-col justify-between" data-id="15">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">15. Máximo Drones Despl.</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">148 <span class="text-xs text-teal-600">Un</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(15, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(15, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(15, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(15, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-red-500 flex flex-col justify-between" data-id="16" data-nombre="Fugas Totales Reg." data-val="16" data-unit="Alertas">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-red-500 flex flex-col justify-between" data-id="16">
             <div>
                 <p class="text-xs text-red-600 font-bold uppercase">16. Fugas Totales Reg.</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">16 <span class="text-xs text-red-500">Alertas</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(16, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(16, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(16, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(16, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-teal-500 flex flex-col justify-between" data-id="17" data-nombre="Días sin Fugas" data-val="86" data-unit="Días">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-teal-500 flex flex-col justify-between" data-id="17">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">17. Días sin Fugas</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">86 <span class="text-xs text-teal-600">Días</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(17, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(17, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(17, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(17, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-red-500 flex flex-col justify-between" data-id="18" data-nombre="Tasa Fugas Crítica" data-val="14.00" data-unit="%">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-red-500 flex flex-col justify-between" data-id="18">
             <div>
                 <p class="text-xs text-red-600 font-bold uppercase">18. Tasa Fugas Crítica</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">14.00 <span class="text-xs text-red-500">%</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(18, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(18, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(18, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(18, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-teal-500 flex flex-col justify-between" data-id="19" data-nombre="Días en Estado Óptimo" data-val="65" data-unit="Días">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-teal-500 flex flex-col justify-between" data-id="19">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">19. Días en Estado Óptimo</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">65 <span class="text-xs text-teal-600">Días</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(19, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(19, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(19, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(19, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
-        <div class="comic-panel p-4 bg-white border-l-8 border-l-amber-500 flex flex-col justify-between" data-id="20" data-nombre="Días en Mantenimiento" data-val="9" data-unit="Días">
+        <div class="comic-panel p-4 bg-white border-l-8 border-l-amber-500 flex flex-col justify-between" data-id="20">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">20. Días en Mantenimiento</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1 font-mono">9 <span class="text-xs text-amber-600">Días</span></p>
             </div>
             <div class="flex gap-2 mt-3 pt-2 border-t border-slate-100">
-                <button onclick="cargarMetrica(20, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition">→ V1</button>
-                <button onclick="cargarMetrica(20, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition">→ V2</button>
+                <button onclick="cargarMetrica(20, 'V1')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V1</button>
+                <button onclick="cargarMetrica(20, 'V2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white text-xs py-1 rounded font-bold transition cursor-pointer">→ V2</button>
             </div>
         </div>
 
