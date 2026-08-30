@@ -3,150 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USS Leviathan - XenoFuel Dashboard</title>
-    <!-- Tailwind CSS para diseño rápido y responsivo -->
+    <title>USS LEVIATHAN // ARCHIVOS DE TELEMETRÍA XENO-04</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js para gráficos interactivos -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts estilo Comic/Retro -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #0b0f19;
-            color: #e2e8f0;
-            font-family: 'Courier New', Courier, monospace;
+            background-color: #0f1410;
+            color: #d1ffd6;
+            font-family: 'Special Elite', monospace;
+            background-image: radial-gradient(rgba(40, 200, 80, 0.05) 1px, transparent 0);
+            background-size: 4px 4px;
         }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+        
+        /* Estética de Cómic Sci-Fi / Retro CRT */
+        .comic-panel {
+            background-color: #141c16;
+            border: 4px solid #233827;
+            box-shadow: 6px 6px 0px #000000;
+            position: relative;
+        }
+
+        .comic-panel-alert {
+            background-color: #2b1414;
+            border: 4px solid #5c2323;
+            box-shadow: 6px 6px 0px #000000;
+        }
+
+        .comic-header {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0px #000;
+        }
+
+        .crt-screen {
+            background-color: #050806;
+            border: 3px solid #1e3a22;
+            box-shadow: inset 0 0 15px rgba(34, 197, 94, 0.15);
+        }
+
+        /* Estilo de viñeta de cómic con viñeta de diálogo o etiqueta */
+        .comic-badge {
+            font-family: 'VT323', monospace;
+            text-transform: uppercase;
+            border: 2px solid currentColor;
+            box-shadow: 3px 3px 0px #000;
         }
     </style>
 </head>
 <body class="p-4 md:p-8 min-h-screen">
 
-    <!-- Header -->
-    <header class="flex flex-col md:flex-row justify-between items-center mb-8 pb-4 border-b border-cyan-500/30">
-        <div>
-            <h1 class="text-3xl font-extrabold tracking-wider text-cyan-400">USS LEVIATHAN</h1>
-            <p class="text-xs text-slate-400 tracking-widest mt-1">TELEMETRÍA DE EXTRACCIÓN DE XENOCOMBUSTIBLE</p>
-        </div>
-        <div class="mt-4 md:mt-0 flex gap-4">
-            <span class="px-3 py-1 rounded bg-cyan-950 border border-cyan-500/40 text-cyan-300 text-xs font-bold">ESTADO: ÓPTIMO</span>
-            <span class="px-3 py-1 rounded bg-slate-900 border border-slate-700 text-slate-300 text-xs">CICLO: 2026-Q1</span>
+    <!-- Cabecera estilo Portada de Cómic Pulp / Tense Sci-Fi -->
+    <header class="comic-panel p-6 mb-8 rounded-none border-green-800">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <div class="inline-block bg-green-900 text-green-200 px-3 py-0.5 text-xs font-bold mb-2 comic-badge">REGISTRO CLASIFICADO N° 849-B</div>
+                <h1 class="text-4xl md:text-5xl comic-header text-green-400">USS LEVIATHAN // XENOFUEL</h1>
+                <p class="text-xs text-green-600 tracking-widest mt-1">SUBSISTEMA DE EXTRACCIÓN Y CONTENCIÓN DE BIO-FLUIDOS</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-red-950 text-red-400 text-xs font-bold comic-badge border-red-700">¡ALERTA DE BIO-CONTENCIÓN!</span>
+                <span class="px-3 py-1 bg-black text-green-400 text-xs comic-badge">SECTOR: DELTA-9</span>
+            </div>
         </div>
     </header>
 
-    <!-- Gráficos Principales -->
+    <!-- Gráficos Estilo Monitor de Nave (CRT) -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <div class="glass-card p-5 rounded-xl shadow-lg">
-            <h2 class="text-sm font-semibold text-cyan-400 mb-4 tracking-wider">EXTRACCIÓN DIARIA VS INGRESOS</h2>
-            <div class="relative h-64">
+        <div class="comic-panel p-5">
+            <h2 class="text-sm font-bold text-green-300 mb-3 uppercase tracking-wider border-b-2 border-green-900 pb-2">
+                &gt; FLUJO DE EXTRACCIÓN VS INGRESOS (kT / M⌬)
+            </h2>
+            <div class="relative h-64 crt-screen p-2">
                 <canvas id="chartProduccion"></canvas>
             </div>
         </div>
-        <div class="glass-card p-5 rounded-xl shadow-lg">
-            <h2 class="text-sm font-semibold text-cyan-400 mb-4 tracking-wider">ESTADO DEL SISTEMA Y TEMPERATURA</h2>
-            <div class="relative h-64">
+        <div class="comic-panel p-5">
+            <h2 class="text-sm font-bold text-green-300 mb-3 uppercase tracking-wider border-b-2 border-green-900 pb-2">
+                &gt; TEMPERATURA DE NÚCLEO POR SECTOR (°C)
+            </h2>
+            <div class="relative h-64 crt-screen p-2">
                 <canvas id="chartTemperatura"></canvas>
             </div>
         </div>
     </div>
 
-    <!-- Panel de las 20 Métricas -->
-    <h2 class="text-xl font-bold text-cyan-300 mb-4 tracking-wider">PANEL DE CONTROL GENERAL (20 MÉTRICAS)</h2>
+    <!-- Panel de Métricas (20 Bloques Estilo Viñetas) -->
+    <h2 class="text-2xl comic-header text-green-400 mb-4 tracking-wider">&gt; ESTADÍSTICAS DEL SISTEMA CENTRAL (20 MÉTRICAS)</h2>
+    
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         
         <!-- Bloque 1: Producción -->
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-cyan-400">
-            <p class="text-xs text-slate-400">1. Extracción Total</p>
-            <p class="text-xl font-bold text-white mt-1">2,880.72 <span class="text-xs text-cyan-400">kT</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-green-500">
+            <p class="text-xs text-green-600 font-bold uppercase">1. Extracción Total</p>
+            <p class="text-2xl font-bold text-green-300 mt-1 font-mono">2,880.72 <span class="text-xs text-green-500">kT</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-cyan-400">
-            <p class="text-xs text-slate-400">2. Extracción Prom. Diaria</p>
-            <p class="text-xl font-bold text-white mt-1">28.81 <span class="text-xs text-cyan-400">kT</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-green-500">
+            <p class="text-xs text-green-600 font-bold uppercase">2. Extracción Prom. Diaria</p>
+            <p class="text-2xl font-bold text-green-300 mt-1 font-mono">28.81 <span class="text-xs text-green-500">kT</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-cyan-400">
-            <p class="text-xs text-slate-400">3. Extracción Máx. Diaria</p>
-            <p class="text-xl font-bold text-white mt-1">49.48 <span class="text-xs text-cyan-400">kT</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-green-500">
+            <p class="text-xs text-green-600 font-bold uppercase">3. Extracción Máx. Diaria</p>
+            <p class="text-2xl font-bold text-green-300 mt-1 font-mono">49.48 <span class="text-xs text-green-500">kT</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-cyan-400">
-            <p class="text-xs text-slate-400">4. Extracción Mín. Diaria</p>
-            <p class="text-xl font-bold text-white mt-1">10.22 <span class="text-xs text-cyan-400">kT</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-green-500">
+            <p class="text-xs text-green-600 font-bold uppercase">4. Extracción Mín. Diaria</p>
+            <p class="text-2xl font-bold text-green-300 mt-1 font-mono">10.22 <span class="text-xs text-green-500">kT</span></p>
         </div>
 
         <!-- Bloque 2: Finanzas -->
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-emerald-400">
-            <p class="text-xs text-slate-400">5. Ingresos Totales</p>
-            <p class="text-xl font-bold text-white mt-1">1,495.66 <span class="text-xs text-emerald-400">M ⌬</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-emerald-600">
+            <p class="text-xs text-green-600 font-bold uppercase">5. Ingresos Totales</p>
+            <p class="text-2xl font-bold text-emerald-300 mt-1 font-mono">1,495.66 <span class="text-xs text-emerald-500">M ⌬</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-emerald-400">
-            <p class="text-xs text-slate-400">6. Ingreso Prom. Diario</p>
-            <p class="text-xl font-bold text-white mt-1">14.96 <span class="text-xs text-emerald-400">M ⌬</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-emerald-600">
+            <p class="text-xs text-green-600 font-bold uppercase">6. Ingreso Prom. Diario</p>
+            <p class="text-2xl font-bold text-emerald-300 mt-1 font-mono">14.96 <span class="text-xs text-emerald-500">M ⌬</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-emerald-400">
-            <p class="text-xs text-slate-400">7. Ingreso Máx. Diario</p>
-            <p class="text-xl font-bold text-white mt-1">24.71 <span class="text-xs text-emerald-400">M ⌬</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-emerald-600">
+            <p class="text-xs text-green-600 font-bold uppercase">7. Ingreso Máx. Diario</p>
+            <p class="text-2xl font-bold text-emerald-300 mt-1 font-mono">24.71 <span class="text-xs text-emerald-500">M ⌬</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-emerald-400">
-            <p class="text-xs text-slate-400">8. Margen Ganancia / kT</p>
-            <p class="text-xl font-bold text-white mt-1">0.52 <span class="text-xs text-emerald-400">M ⌬</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-emerald-600">
+            <p class="text-xs text-green-600 font-bold uppercase">8. Margen Ganancia / kT</p>
+            <p class="text-2xl font-bold text-emerald-300 mt-1 font-mono">0.52 <span class="text-xs text-emerald-500">M ⌬</span></p>
         </div>
 
         <!-- Bloque 3: Motores y Energía -->
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-amber-400">
-            <p class="text-xs text-slate-400">9. Eficiencia Motores</p>
-            <p class="text-xl font-bold text-white mt-1">92.25 <span class="text-xs text-amber-400">%</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-amber-600">
+            <p class="text-xs text-green-600 font-bold uppercase">9. Eficiencia Motores</p>
+            <p class="text-2xl font-bold text-amber-300 mt-1 font-mono">92.25 <span class="text-xs text-amber-500">%</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-amber-400">
-            <p class="text-xs text-slate-400">10. Temp. Prom. Núcleo</p>
-            <p class="text-xl font-bold text-white mt-1">571.90 <span class="text-xs text-amber-400">°C</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-amber-600">
+            <p class="text-xs text-green-600 font-bold uppercase">10. Temp. Prom. Núcleo</p>
+            <p class="text-2xl font-bold text-amber-300 mt-1 font-mono">571.90 <span class="text-xs text-amber-500">°C</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-amber-400">
-            <p class="text-xs text-slate-400">11. Temp. Máx. Registrada</p>
-            <p class="text-xl font-bold text-white mt-1">746.68 <span class="text-xs text-amber-400">°C</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-amber-600">
+            <p class="text-xs text-green-600 font-bold uppercase">11. Temp. Máx. Registrada</p>
+            <p class="text-2xl font-bold text-amber-300 mt-1 font-mono">746.68 <span class="text-xs text-amber-500">°C</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-amber-400">
-            <p class="text-xs text-slate-400">12. Consumo Energético Total</p>
-            <p class="text-xl font-bold text-white mt-1">20,320.92 <span class="text-xs text-amber-400">MW</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-amber-600">
+            <p class="text-xs text-green-600 font-bold uppercase">12. Consumo Energético Tot.</p>
+            <p class="text-xl font-bold text-amber-300 mt-1 font-mono">20,320.92 <span class="text-xs text-amber-500">MW</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-amber-400">
-            <p class="text-xs text-slate-400">13. Consumo Promedio</p>
-            <p class="text-xl font-bold text-white mt-1">203.21 <span class="text-xs text-amber-400">MW</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-amber-600">
+            <p class="text-xs text-green-600 font-bold uppercase">13. Consumo Promedio</p>
+            <p class="text-2xl font-bold text-amber-300 mt-1 font-mono">203.21 <span class="text-xs text-amber-500">MW</span></p>
         </div>
 
-        <!-- Bloque 4: Operaciones y Seguridad -->
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-purple-400">
-            <p class="text-xs text-slate-400">14. Promedio Drones Activos</p>
-            <p class="text-xl font-bold text-white mt-1">100.59 <span class="text-xs text-purple-400">Unidades</span></p>
+        <!-- Bloque 4: Operaciones y Seguridad (Algunos en alerta roja de cómic) -->
+        <div class="comic-panel p-4 border-l-8 border-l-cyan-600">
+            <p class="text-xs text-green-600 font-bold uppercase">14. Promedio Drones Activos</p>
+            <p class="text-2xl font-bold text-cyan-300 mt-1 font-mono">100.59 <span class="text-xs text-cyan-500">Un</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-purple-400">
-            <p class="text-xs text-slate-400">15. Máximo Drones Despl.</p>
-            <p class="text-xl font-bold text-white mt-1">148 <span class="text-xs text-purple-400">Unidades</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-cyan-600">
+            <p class="text-xs text-green-600 font-bold uppercase">15. Máximo Drones Despl.</p>
+            <p class="text-2xl font-bold text-cyan-300 mt-1 font-mono">148 <span class="text-xs text-cyan-500">Un</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-rose-400">
-            <p class="text-xs text-slate-400">16. Fugas Totales Reg.</p>
-            <p class="text-xl font-bold text-white mt-1">16 <span class="text-xs text-rose-400">Alertas</span></p>
+        <div class="comic-panel-alert p-4 border-l-8 border-l-red-600">
+            <p class="text-xs text-red-400 font-bold uppercase">16. Fugas Totales Reg.</p>
+            <p class="text-2xl font-bold text-red-200 mt-1 font-mono">16 <span class="text-xs text-red-400">Alertas</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-emerald-400">
-            <p class="text-xs text-slate-400">17. Días sin Fugas</p>
-            <p class="text-xl font-bold text-white mt-1">86 <span class="text-xs text-emerald-400">Días</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-green-600">
+            <p class="text-xs text-green-600 font-bold uppercase">17. Días sin Fugas</p>
+            <p class="text-2xl font-bold text-green-300 mt-1 font-mono">86 <span class="text-xs text-green-500">Días</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-rose-400">
-            <p class="text-xs text-slate-400">18. Tasa Fugas</p>
-            <p class="text-xl font-bold text-white mt-1">14.00 <span class="text-xs text-rose-400">%</span></p>
+        <div class="comic-panel-alert p-4 border-l-8 border-l-red-600">
+            <p class="text-xs text-red-400 font-bold uppercase">18. Tasa Fugas Crítica</p>
+            <p class="text-2xl font-bold text-red-200 mt-1 font-mono">14.00 <span class="text-xs text-red-400">%</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-cyan-400">
-            <p class="text-xs text-slate-400">19. Días en Estado Óptimo</p>
-            <p class="text-xl font-bold text-white mt-1">65 <span class="text-xs text-cyan-400">Días</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-green-600">
+            <p class="text-xs text-green-600 font-bold uppercase">19. Días en Estado Óptimo</p>
+            <p class="text-2xl font-bold text-green-300 mt-1 font-mono">65 <span class="text-xs text-green-500">Días</span></p>
         </div>
-        <div class="glass-card p-4 rounded-lg border-l-4 border-l-amber-400">
-            <p class="text-xs text-slate-400">20. Días en Mantenimiento</p>
-            <p class="text-xl font-bold text-white mt-1">9 <span class="text-xs text-amber-400">Días</span></p>
+        <div class="comic-panel p-4 border-l-8 border-l-amber-600">
+            <p class="text-xs text-green-600 font-bold uppercase">20. Días en Mantenimiento</p>
+            <p class="text-2xl font-bold text-amber-300 mt-1 font-mono">9 <span class="text-xs text-amber-500">Días</span></p>
         </div>
 
     </div>
 
-    <!-- Script para renderizar gráficos de prueba -->
+    <!-- Script de Gráficos Adaptados al Estilo Retro-Verde -->
     <script>
+        Chart.defaults.color = '#86efac';
+        Chart.defaults.font.family = 'Special Elite';
+
         const ctx1 = document.getElementById('chartProduccion').getContext('2d');
         new Chart(ctx1, {
             type: 'line',
@@ -155,13 +199,20 @@
                 datasets: [{
                     label: 'Extracción (kT)',
                     data: [15, 38, 22, 45, 30, 49],
-                    borderColor: '#38bdf8',
-                    backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                    borderColor: '#22c55e',
+                    backgroundColor: 'rgba(34, 197, 94, 0.2)',
+                    borderWidth: 3,
                     fill: true,
-                    tension: 0.3
+                    tension: 0.1
                 }]
             },
-            options: { responsive: true, maintainAspectRatio: false }
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false,
+                scales: {
+                    grid: { color: '#14301a' }
+                }
+            }
         });
 
         const ctx2 = document.getElementById('chartTemperatura').getContext('2d');
@@ -172,10 +223,15 @@
                 datasets: [{
                     label: 'Temperatura Promedio (°C)',
                     data: [540, 610, 490, 680],
-                    backgroundColor: ['#38bdf8', '#34d399', '#ffb020', '#f87171']
+                    backgroundColor: ['#16a34a', '#ca8a04', '#0284c7', '#dc2626'],
+                    borderColor: '#000000',
+                    borderWidth: 2
                 }]
             },
-            options: { responsive: true, maintainAspectRatio: false }
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false 
+            }
         });
     </script>
 </body>
