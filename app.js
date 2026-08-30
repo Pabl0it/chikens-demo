@@ -1,8 +1,9 @@
-// Configuración global estética de la nave
-Chart.defaults.color = '#86efac';
+JavaScript
+// Configuración global estética clínica de laboratorio (Azul / Blanco luminoso)
+Chart.defaults.color = '#bae6fd';
 Chart.defaults.font.family = 'Special Elite';
 
-// Gráfico 1: Línea de Producción con animación fluida de entrada
+// Gráfico 1: Línea de Producción luminosa
 const ctx1 = document.getElementById('chartProduccion').getContext('2d');
 new Chart(ctx1, {
     type: 'line',
@@ -11,8 +12,8 @@ new Chart(ctx1, {
         datasets: [{
             label: 'Extracción (kT)',
             data: [15, 38, 22, 45, 30, 49],
-            borderColor: '#22c55e',
-            backgroundColor: 'rgba(34, 197, 94, 0.15)',
+            borderColor: '#38bdf8',
+            backgroundColor: 'rgba(56, 189, 248, 0.25)',
             borderWidth: 3,
             fill: true,
             tension: 0.2
@@ -22,16 +23,17 @@ new Chart(ctx1, {
         responsive: true, 
         maintainAspectRatio: false,
         animation: {
-            duration: 2000, // Se dibuja suavemente al cargar la página
+            duration: 2000,
             easing: 'easeOutQuart'
         },
         scales: {
-            grid: { color: '#14301a' }
+            grid: { color: '#1e293b' },
+            ticks: { color: '#bae6fd' }
         }
     }
 });
 
-// Gráfico 2: Temperatura por Sector
+// Gráfico 2: Temperatura por Sector con paleta azul, blanca y celeste
 const ctx2 = document.getElementById('chartTemperatura').getContext('2d');
 new Chart(ctx2, {
     type: 'bar',
@@ -40,8 +42,8 @@ new Chart(ctx2, {
         datasets: [{
             label: 'Temperatura Promedio (°C)',
             data: [540, 610, 490, 680],
-            backgroundColor: ['#16a34a', '#ca8a04', '#0284c7', '#dc2626'],
-            borderColor: '#000000',
+            backgroundColor: ['#38bdf8', '#ffffff', '#0284c7', '#93c5fd'],
+            borderColor: '#0f172a',
             borderWidth: 2
         }]
     },
@@ -51,6 +53,9 @@ new Chart(ctx2, {
         animation: {
             duration: 2500,
             easing: 'easeInOutExpo'
+        },
+        scales: {
+            grid: { color: '#1e293b' }
         }
     }
 });
