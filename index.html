@@ -39,7 +39,7 @@
                 </h2>
                 <span class="text-xs bg-blue-600 text-white px-2 py-0.5 rounded font-mono">VENTANA 1</span>
             </div>
-            <div class="w-full h-72 lab-screen p-2 relative">
+            <div class="lab-screen p-2 relative chart-container">
                 <div class="scanline"></div>
                 <canvas id="chartV1"></canvas>
             </div>
@@ -53,7 +53,7 @@
                 </h2>
                 <span class="text-xs bg-cyan-600 text-white px-2 py-0.5 rounded font-mono">VENTANA 2</span>
             </div>
-            <div class="w-full h-72 lab-screen p-2 relative">
+            <div class="lab-screen p-2 relative chart-container">
                 <div class="scanline"></div>
                 <canvas id="chartV2"></canvas>
             </div>
@@ -65,7 +65,7 @@
     
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="contenedorMetricas">
         
-        <!-- Bloque 1: Producción -->
+        <!-- Bloque de Métricas (1 al 20) -->
         <div class="comic-panel p-4 bg-white border-l-8 border-l-blue-500 flex flex-col justify-between">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">1. Extracción Total</p>
@@ -110,7 +110,6 @@
             </div>
         </div>
 
-        <!-- Bloque 2: Finanzas -->
         <div class="comic-panel p-4 bg-white border-l-8 border-l-cyan-500 flex flex-col justify-between">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">5. Ingresos Totales</p>
@@ -155,7 +154,6 @@
             </div>
         </div>
 
-        <!-- Bloque 3: Motores y Energía -->
         <div class="comic-panel p-4 bg-white border-l-8 border-l-indigo-500 flex flex-col justify-between">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">9. Eficiencia Motores</p>
@@ -211,7 +209,6 @@
             </div>
         </div>
 
-        <!-- Bloque 4: Operaciones y Seguridad -->
         <div class="comic-panel p-4 bg-white border-l-8 border-l-teal-500 flex flex-col justify-between">
             <div>
                 <p class="text-xs text-slate-500 font-bold uppercase">14. Promedio Drones Activos</p>

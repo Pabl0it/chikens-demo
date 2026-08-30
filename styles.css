@@ -8,11 +8,17 @@ body {
     background-size: 8px 8px, 100% 4px;
 }
 
+/* Contenedor del gráfico con altura estricta para evitar colapso de Chart.js */
+.chart-container {
+    position: relative;
+    height: 270px;
+    width: 100%;
+}
+
 .lab-screen {
     background-color: #ffffff;
     border: 3px solid #0284c7;
     box-shadow: inset 0 0 15px rgba(2, 132, 199, 0.1), 0 0 12px rgba(2, 132, 199, 0.2);
-    position: relative;
     overflow: hidden;
 }
 

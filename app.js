@@ -24,7 +24,7 @@ const metricsDatabase = {
 let chartV1Instance = null;
 let chartV2Instance = null;
 
-// Inicializamos cargando por defecto dos métricas al arrancar
+// Carga inicial obligatoria al abrir la página para asegurar gráficos visibles de inmediato
 window.addEventListener('DOMContentLoaded', () => {
     cargarMetricaEnVentana(1, 'V1');
     cargarMetricaEnVentana(5, 'V2');
@@ -34,7 +34,6 @@ function cargarMetricaEnVentana(idMetrica, ventanaDestino) {
     const metrica = metricsDatabase[idMetrica];
     if (!metrica) return;
 
-    // Generamos puntos de tendencia simulados según el valor base de la tarjeta
     const labels = ['Fase 1', 'Fase 2', 'Fase 3', 'Fase 4', 'Fase 5', 'Fase 6'];
     const valores = [
         Number((metrica.base * 0.75).toFixed(2)),
@@ -49,7 +48,9 @@ function cargarMetricaEnVentana(idMetrica, ventanaDestino) {
         document.getElementById('tituloV1').textContent = `> V1: ${metrica.name.toUpperCase()} (${metrica.unit})`;
         const ctx = document.getElementById('chartV1').getContext('2d');
         
-        if (chartV1Instance) chartV1Instance.destroy();
+        if (chartV1Instance) {
+            chartV1Instance.destroy();
+        }
 
         chartV1Instance = new Chart(ctx, {
             type: metrica.type,
@@ -59,7 +60,7 @@ function cargarMetricaEnVentana(idMetrica, ventanaDestino) {
                     label: `${metrica.name} (${metrica.unit})`,
                     data: valores,
                     borderColor: '#0284c7',
-                    backgroundColor: metrica.type === 'line' ? 'rgba(2, 132, 199, 0.15)' : '#0284c7',
+                    backgroundColor: metrica.type === 'line' ? 'rgba(2, 132, 199, 0.2)' : '#0284c7',
                     borderWidth: 3,
                     fill: metrica.type === 'line',
                     tension: 0.2
@@ -68,10 +69,9 @@ function cargarMetricaEnVentana(idMetrica, ventanaDestino) {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: { duration: 600 },
                 scales: {
-                    grid: { color: '#e2e8f0' },
-                    ticks: { color: '#0f172a' }
+                    x: { ticks: { color: '#0f172a' }, grid: { color: '#e2e8f0' } },
+                    y: { ticks: { color: '#0f172a' }, grid: { color: '#e2e8f0' } }
                 }
             }
         });
@@ -79,7 +79,9 @@ function cargarMetricaEnVentana(idMetrica, ventanaDestino) {
         document.getElementById('tituloV2').textContent = `> V2: ${metrica.name.toUpperCase()} (${metrica.unit})`;
         const ctx = document.getElementById('chartV2').getContext('2d');
         
-        if (chartV2Instance) chartV2Instance.destroy();
+        if (chartV2Instance) {
+            chartV2Instance.destroy();
+        }
 
         chartV2Instance = new Chart(ctx, {
             type: metrica.type === 'line' ? 'bar' : 'line',
@@ -89,7 +91,7 @@ function cargarMetricaEnVentana(idMetrica, ventanaDestino) {
                     label: `${metrica.name} (${metrica.unit})`,
                     data: valores,
                     borderColor: '#0e7490',
-                    backgroundColor: metrica.type === 'line' ? '#0e7490' : 'rgba(14, 116, 144, 0.25)',
+                    backgroundColor: metrica.type === 'line' ? '#0e7490' : 'rgba(14, 116, 144, 0.3)',
                     borderWidth: 3,
                     fill: metrica.type !== 'line',
                     tension: 0.2
@@ -98,10 +100,9 @@ function cargarMetricaEnVentana(idMetrica, ventanaDestino) {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: { duration: 600 },
                 scales: {
-                    grid: { color: '#e2e8f0' },
-                    ticks: { color: '#0f172a' }
+                    x: { ticks: { color: '#0f172a' }, grid: { color: '#e2e8f0' } },
+                    y: { ticks: { color: '#0f172a' }, grid: { color: '#e2e8f0' } }
                 }
             }
         });
