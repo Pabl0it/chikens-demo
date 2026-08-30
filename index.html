@@ -4,18 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>USS LEVIATHAN // REGISTRO CLASIFICADO XENO-04</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Google Fonts: Estilo Comic y Terminal -->
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
-    <!-- Enlace al archivo CSS externo -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="p-4 md:p-8 min-h-screen">
 
-    <!-- Cabecera estilo Portada de Cómic Pulp / Tense Sci-Fi -->
     <header class="comic-panel p-6 mb-8 border-green-800">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
@@ -34,31 +29,33 @@
         </div>
     </header>
 
-    <!-- Gráficos Estilo Monitor de Nave (CRT) - Altura fija obligatoria para evitar espacios vacíos -->
+    <!-- Ventanas Superiores con Láser de Escaneo Estilo Radar -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <div class="comic-panel p-5">
-            <h2 class="text-sm font-bold text-green-300 mb-3 uppercase tracking-wider border-b-2 border-green-900 pb-2">
-                &gt; FLUJO DE EXTRACCIÓN VS INGRESOS (kT / M⌬)
+            <h2 class="text-sm font-bold text-green-300 mb-3 uppercase tracking-wider border-b-2 border-green-900 pb-2 flex justify-between">
+                <span>&gt; FLUJO DE EXTRACCIÓN VS INGRESOS</span>
+                <span class="text-xs text-green-500 animate-pulse">● EN VIVO</span>
             </h2>
             <div class="w-full h-72 crt-screen p-2 relative">
+                <div class="scanline"></div>
                 <canvas id="chartProduccion"></canvas>
             </div>
         </div>
         <div class="comic-panel p-5">
-            <h2 class="text-sm font-bold text-green-300 mb-3 uppercase tracking-wider border-b-2 border-green-900 pb-2">
-                &gt; TEMPERATURA DE NÚCLEO POR SECTOR (°C)
+            <h2 class="text-sm font-bold text-green-300 mb-3 uppercase tracking-wider border-b-2 border-green-900 pb-2 flex justify-between">
+                <span>&gt; TEMPERATURA DE NÚCLEO POR SECTOR</span>
+                <span class="text-xs text-amber-500 animate-pulse">● ESTABLE</span>
             </h2>
             <div class="w-full h-72 crt-screen p-2 relative">
+                <div class="scanline"></div>
                 <canvas id="chartTemperatura"></canvas>
             </div>
         </div>
     </div>
 
-    <!-- Panel de Métricas (20 Bloques Estilo Viñetas) -->
     <h2 class="text-2xl comic-header text-green-400 mb-4 tracking-wider">&gt; ESTADÍSTICAS DEL SISTEMA CENTRAL (20 MÉTRICAS)</h2>
     
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        
         <!-- Bloque 1: Producción -->
         <div class="comic-panel p-4 border-l-8 border-l-green-500">
             <p class="text-xs text-green-600 font-bold uppercase">1. Extracción Total</p>
@@ -146,10 +143,8 @@
             <p class="text-xs text-green-600 font-bold uppercase">20. Días en Mantenimiento</p>
             <p class="text-2xl font-bold text-amber-300 mt-1 font-mono">9 <span class="text-xs text-amber-500">Días</span></p>
         </div>
-
     </div>
 
-    <!-- Enlace al archivo JavaScript externo -->
     <script src="app.js"></script>
 </body>
 </html>

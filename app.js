@@ -1,8 +1,8 @@
-// Configuración global para Chart.js con la estética de la nave
+// Configuración global estética de la nave
 Chart.defaults.color = '#86efac';
 Chart.defaults.font.family = 'Special Elite';
 
-// Gráfico 1: Línea de Producción
+// Gráfico 1: Línea de Producción con animación fluida de entrada
 const ctx1 = document.getElementById('chartProduccion').getContext('2d');
 new Chart(ctx1, {
     type: 'line',
@@ -12,15 +12,19 @@ new Chart(ctx1, {
             label: 'Extracción (kT)',
             data: [15, 38, 22, 45, 30, 49],
             borderColor: '#22c55e',
-            backgroundColor: 'rgba(34, 197, 94, 0.2)',
+            backgroundColor: 'rgba(34, 197, 94, 0.15)',
             borderWidth: 3,
             fill: true,
-            tension: 0.1
+            tension: 0.2
         }]
     },
     options: { 
         responsive: true, 
         maintainAspectRatio: false,
+        animation: {
+            duration: 2000, // Se dibuja suavemente al cargar la página
+            easing: 'easeOutQuart'
+        },
         scales: {
             grid: { color: '#14301a' }
         }
@@ -43,6 +47,10 @@ new Chart(ctx2, {
     },
     options: { 
         responsive: true, 
-        maintainAspectRatio: false 
+        maintainAspectRatio: false,
+        animation: {
+            duration: 2500,
+            easing: 'easeInOutExpo'
+        }
     }
 });
