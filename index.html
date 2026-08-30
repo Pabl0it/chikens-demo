@@ -3,81 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USS LEVIATHAN // ARCHIVOS DE TELEMETRÍA XENO-04</title>
+    <title>USS LEVIATHAN // REGISTRO CLASIFICADO XENO-04</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Google Fonts estilo Comic/Retro -->
+    <!-- Google Fonts: Estilo Comic y Terminal -->
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #0f1410;
-            color: #d1ffd6;
-            font-family: 'Special Elite', monospace;
-            background-image: radial-gradient(rgba(40, 200, 80, 0.05) 1px, transparent 0);
-            background-size: 4px 4px;
-        }
-        
-        /* Estética de Cómic Sci-Fi / Retro CRT */
-        .comic-panel {
-            background-color: #141c16;
-            border: 4px solid #233827;
-            box-shadow: 6px 6px 0px #000000;
-            position: relative;
-        }
-
-        .comic-panel-alert {
-            background-color: #2b1414;
-            border: 4px solid #5c2323;
-            box-shadow: 6px 6px 0px #000000;
-        }
-
-        .comic-header {
-            font-family: 'Bangers', cursive;
-            letter-spacing: 2px;
-            text-shadow: 3px 3px 0px #000;
-        }
-
-        .crt-screen {
-            background-color: #050806;
-            border: 3px solid #1e3a22;
-            box-shadow: inset 0 0 15px rgba(34, 197, 94, 0.15);
-        }
-
-        /* Estilo de viñeta de cómic con viñeta de diálogo o etiqueta */
-        .comic-badge {
-            font-family: 'VT323', monospace;
-            text-transform: uppercase;
-            border: 2px solid currentColor;
-            box-shadow: 3px 3px 0px #000;
-        }
-    </style>
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="p-4 md:p-8 min-h-screen">
 
     <!-- Cabecera estilo Portada de Cómic Pulp / Tense Sci-Fi -->
-    <header class="comic-panel p-6 mb-8 rounded-none border-green-800">
+    <header class="comic-panel p-6 mb-8 border-green-800">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-                <div class="inline-block bg-green-900 text-green-200 px-3 py-0.5 text-xs font-bold mb-2 comic-badge">REGISTRO CLASIFICADO N° 849-B</div>
+                <div class="inline-block bg-green-900 text-green-200 px-3 py-0.5 text-xs font-bold mb-2 comic-badge">
+                    REGISTRO CLASIFICADO N° 849-B
+                </div>
                 <h1 class="text-4xl md:text-5xl comic-header text-green-400">USS LEVIATHAN // XENOFUEL</h1>
                 <p class="text-xs text-green-600 tracking-widest mt-1">SUBSISTEMA DE EXTRACCIÓN Y CONTENCIÓN DE BIO-FLUIDOS</p>
             </div>
             <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-red-950 text-red-400 text-xs font-bold comic-badge border-red-700">¡ALERTA DE BIO-CONTENCIÓN!</span>
+                <span class="px-3 py-1 bg-red-950 text-red-400 text-xs font-bold comic-badge border-red-700 animate-pulse">
+                    ¡ALERTA DE BIO-CONTENCIÓN!
+                </span>
                 <span class="px-3 py-1 bg-black text-green-400 text-xs comic-badge">SECTOR: DELTA-9</span>
             </div>
         </div>
     </header>
 
-    <!-- Gráficos Estilo Monitor de Nave (CRT) -->
+    <!-- Gráficos Estilo Monitor de Nave (CRT) - Altura fija obligatoria para evitar espacios vacíos -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <div class="comic-panel p-5">
             <h2 class="text-sm font-bold text-green-300 mb-3 uppercase tracking-wider border-b-2 border-green-900 pb-2">
                 &gt; FLUJO DE EXTRACCIÓN VS INGRESOS (kT / M⌬)
             </h2>
-            <div class="relative h-64 crt-screen p-2">
+            <div class="w-full h-72 crt-screen p-2 relative">
                 <canvas id="chartProduccion"></canvas>
             </div>
         </div>
@@ -85,7 +48,7 @@
             <h2 class="text-sm font-bold text-green-300 mb-3 uppercase tracking-wider border-b-2 border-green-900 pb-2">
                 &gt; TEMPERATURA DE NÚCLEO POR SECTOR (°C)
             </h2>
-            <div class="relative h-64 crt-screen p-2">
+            <div class="w-full h-72 crt-screen p-2 relative">
                 <canvas id="chartTemperatura"></canvas>
             </div>
         </div>
@@ -154,7 +117,7 @@
             <p class="text-2xl font-bold text-amber-300 mt-1 font-mono">203.21 <span class="text-xs text-amber-500">MW</span></p>
         </div>
 
-        <!-- Bloque 4: Operaciones y Seguridad (Algunos en alerta roja de cómic) -->
+        <!-- Bloque 4: Operaciones y Seguridad -->
         <div class="comic-panel p-4 border-l-8 border-l-cyan-600">
             <p class="text-xs text-green-600 font-bold uppercase">14. Promedio Drones Activos</p>
             <p class="text-2xl font-bold text-cyan-300 mt-1 font-mono">100.59 <span class="text-xs text-cyan-500">Un</span></p>
@@ -186,53 +149,7 @@
 
     </div>
 
-    <!-- Script de Gráficos Adaptados al Estilo Retro-Verde -->
-    <script>
-        Chart.defaults.color = '#86efac';
-        Chart.defaults.font.family = 'Special Elite';
-
-        const ctx1 = document.getElementById('chartProduccion').getContext('2d');
-        new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: ['Día 1', 'Día 20', 'Día 40', 'Día 60', 'Día 80', 'Día 100'],
-                datasets: [{
-                    label: 'Extracción (kT)',
-                    data: [15, 38, 22, 45, 30, 49],
-                    borderColor: '#22c55e',
-                    backgroundColor: 'rgba(34, 197, 94, 0.2)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.1
-                }]
-            },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false,
-                scales: {
-                    grid: { color: '#14301a' }
-                }
-            }
-        });
-
-        const ctx2 = document.getElementById('chartTemperatura').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Sector Alfa', 'Sector Beta', 'Sector Gamma', 'Sector Delta'],
-                datasets: [{
-                    label: 'Temperatura Promedio (°C)',
-                    data: [540, 610, 490, 680],
-                    backgroundColor: ['#16a34a', '#ca8a04', '#0284c7', '#dc2626'],
-                    borderColor: '#000000',
-                    borderWidth: 2
-                }]
-            },
-            options: { 
-                responsive: true, 
-                maintainAspectRatio: false 
-            }
-        });
-    </script>
+    <!-- Enlace al archivo JavaScript externo -->
+    <script src="app.js"></script>
 </body>
 </html>
